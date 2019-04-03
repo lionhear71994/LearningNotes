@@ -1,0 +1,16 @@
+启动一个activity,并从这个activty获得一个结果。 这时，要通过 startActivityForResult() (取代startActivity()) 来启动activity。 然后通过实现onActivityResult()回调方法来获得返回后的结果。 当这个后续的activity被关闭，它将发送一个 Intent 给 onActivityResult() 方法。
+
+Activity生命周期：
+onCreate():创建view、绑定list数据
+onRestart()
+onStart():如果activity进入前台，则下一个回调方法是onResume()；如果进入隐藏状态，则下一个回调方法是onStop()。
+onResume()
+onPause()
+onStop()
+onDetroy()
+
+保存activity的状态
+onSaveInstanceState() 调用时系统会传入一个Bundle对象， 你可以利用 putString() 之类的方法，以键值对的方式来把activity状态信息保存到该Bundle对象中。
+因为默认实现的 onSaveInstanceState() 方法已经帮你保存了一些UI的状态，所以如果你重写此方法是为了保存更多的状态信息，那么在执行自己的代码之前应该确保先调用一次父类的 onSaveInstanceState() 方法。同理，如果重写 onRestoreInstanceState() 的话，也应该调用一次父类的该方法，这样缺省的代码就能正常恢复view的状态了。
+因为 onSaveInstanceState() 并不保证每次都会被调用，所以你应该只用它来记录activity的一些临时状态信息（UI的状态）——千万不要用它来保存那些需要长久保存的数据。 替代方案是，你应该在用户离开activity的时候利用 onPause() 来保存永久性数据（比如那些需要存入数据库里的数据）。
+

@@ -1,0 +1,4 @@
+
+创建Retrofit实例时需要通过Retrofit.Builder,并调用baseUrl方法设置URL。
+注1： Retrofit2 的baseUlr 必须以 /（斜线） 结束，不然会抛出一个IllegalArgumentException
+

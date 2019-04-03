@@ -1,0 +1,252 @@
+Android中的13种Drawable
+ShapeDrawable：
+	根元素是<shape../>，节点较多
+GradientDrawable
+	渐变区域的Drawable，核心节点：<gradient/>
+BitmapDrawable
+	对Bitmap的一种封装,可以设置它包装的bitmap在BitmapDrawable区域中的绘制方式,有: 平铺填充,拉伸填或保持图片原始大小!以<bitmap>为根节点
+InsetDrawable
+	把一个Drawable嵌入到另外一个Drawable的内部，并且在内部留一些间距
+	<inset xmlns:android="http://schemas.android.com/apk/res/android"  
+		android:drawable="@drawable/test1"  
+		android:insetBottom="10dp"  
+		android:insetLeft="10dp"  
+		android:insetRight="10dp"  
+		android:insetTop="10dp" /> 
+ClipDrawable
+	可以把ClipDrawable理解为从位图上剪下一个部分
+	<clip xmlns:android="http://schemas.android.com/apk/res/android"
+		android:clipOrientation="horizontal"
+		android:drawable="@mipmap/ic_bg_meizi"
+		android:gravity="left" /> 
+RotateDrawable
+	用来对Drawable进行旋转,也是通过setLevel来控制旋转的,最大值也是:10000
+AnimationDrawable
+	AnimationDrawable是用来实现Android中帧动画的,就是把一系列的 Drawable，按照一定得顺序一帧帧地播放；
+LayerDrawable
+	层图形对象，包含一个Drawable数组，然后按照数组对应的顺序来绘制他们，索引 值最大的Drawable会被绘制在最上层！
+TransitionDrawable
+	LayerDrawable的一个子类，TransitionDrawable只管理两层的Drawable！两层！两层！
+	并且提供了透明度变化的动画，可以控制一层Drawable过度到另一层Drawable的动画效果。 根节点为<transition>
+LevelListDrawable
+	用来管理一组Drawable的,我们可以为里面的drawable设置不同的level， 当他们绘制的时候，会根据level属性值获取对应的drawable绘制到画布上，
+StateListDrawable
+	为按钮设置不同状态的drawable的<selctor>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------	
+Drawable：通用的图形对象，用于装载常用格式的图像，既可以是PNG，JPG这样的图像， 也是前面学的那13种Drawable类型的可视化对象！我们可以理解成一个用来放画的——画框！
+Bitmap(位图)：我们可以把他看作一个画架，我们先把画放到上面，然后我们可以 进行一些处理，比如获取图像文件信息，做旋转切割，放大缩小等操作！
+Canvas(画布)：如其名，画布，我们可以在上面作画(绘制)，你既可以用Paint(画笔)， 来画各种形状或者写字，又可以用Path(路径)来绘制多个点，然后连接成各种图形！
+Matrix(矩阵)：用于图形特效处理的，颜色矩阵(ColorMatrix)，还有使用Matrix进行图像的 平移，缩放，旋转，倾斜等！
+
+获取Bitmap位图
+	构造一个BitmapDrawable对象
+	BitmapDrawable bmpMeizi = new BitmapDrawable(getAssets().open("pic_meizi.jpg"));
+	Bitmap mBitmap = bmpMeizi.getBitmap();
+	img_bg.setImageBitmap(mBitmap);
+	BitmapFactory方法：
+	//通过资源ID
+	private Bitmap getBitmapFromResource(Resources res, int resId) {
+		return BitmapFactory.decodeResource(res, resId);
+	}
+
+	//文件
+	private Bitmap getBitmapFromFile(String pathName) {
+		return BitmapFactory.decodeFile(pathName);
+	}
+
+	//字节数组
+	public Bitmap Bytes2Bimap(byte[] b) {
+		if (b.length != 0) {
+			return BitmapFactory.decodeByteArray(b, 0, b.length);
+		} else {
+			return null;
+		}
+	}
+
+	//输入流
+	private Bitmap getBitmapFromStream(InputStream inputStream) {
+		return BitmapFactory.decodeStream(inputStream);
+	}
+	
+	截取Bitmap：Bitmap.createBitmap(bitmap1,100,100,200,200);
+	对Bitmap进行缩放：createScaledBitmap
+
+避免Bitmap引起的OOM技巧小结
+	1 采用低内存占用量的编码方式：BitmapFactory.Options这个类，我们可以设置下其中的inPreferredConfig属性
+	2 图片压缩：通过inSampleSize设置缩放倍数，通过一定的算法，即可得到适合的 inSampleSize
+	3 通过SoftReference引用方式管理图片资源
+	4 LruCache + sd的缓存方式
+
+三个绘图工具类 Paint Canvas Path
+	canvas.drawColor(getResources().getColor(R.color.yellow));   //设置画布背景颜色
+	canvas.drawCircle(200, 200, 100, mPaint);           //画实心圆
+	canvas.drawOval(new RectF(0,0,200,300),mPaint); 	//画椭圆
+	canvas.drawRect(0, 0, 200, 100, mPaint);            //画矩形
+	canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher), 0, 0, mPaint);
+	canvas.drawArc(new RectF(0, 0, 100, 100),0,90,true,mPaint);  //绘制弧形区域
+	canvas.drawRoundRect(new RectF(10,10,210,110),15,15,mPaint); //画圆角矩形
+	canvas.drawText("要绘制的文字",50,50,mPaint);    //绘制文字
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Android中的多媒体开发
+	SoundPool：一般用来 播放密集，急促而又短暂的音效，
+	SoundPool.Builder spb = new SoundPool.Builder();
+	spb.setMaxStreams(10);
+	spb.setAudioAttributes(null);    //转换音频格式
+	SoundPool sp = spb.build();   
+	load()--->play()
+	OnLoadCompleteListener监听声音文件是否加载完毕
+MediaPlayer播放音频与视频
+	MediaPlayer mp = new MediaPlayer();
+	MediaPlayer mp = MediaPlayer.create(this, R.raw.test);  //无需再调用setDataSource
+	//①raw下的资源：
+	MediaPlayer.create(this, R.raw.test);
+	//②本地文件路径：
+	mp.setDataSource("/sdcard/test.mp3");
+	//③网络URL文件：
+	mp.setDataSource("http://www.xxx.com/music/test.mp3");
+	本地Uri：
+	Uri myUri = ....; // initialize Uri here
+	MediaPlayer mediaPlayer = new MediaPlayer();
+	mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+	mediaPlayer.setDataSource(getApplicationContext(), myUri);
+	mediaPlayer.prepare();
+	mediaPlayer.start();
+	外部URL：
+	String url = "http://........"; // your URL here
+	MediaPlayer mediaPlayer = new MediaPlayer();
+	mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+	mediaPlayer.setDataSource(url);
+	mediaPlayer.prepare(); // might take long! (for buffering, etc)
+	mediaPlayer.start();
+	SurfaceView VideoView可播放视频
+Camera拍照
+	Intent it = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	startActivityForResult(it,Activity.DEFAULT_KEYS_DIALER);
+	//重写onActivityResult方法
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == Activity.RESULT_OK){
+            Bundle bundle = data.getExtras();
+            Bitmap bitmap = (Bitmap) bundle.get("data");
+            img_show.setImageBitmap(bitmap);
+        }
+	} 
+	拍完的图片是不会保存到本地的， 我们可以自己写代码把图片保存到我们的SD卡里
+	<uses-permission android:name="android.permission.CAMERA"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+MediaRecord
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.RECORD_AUDIO"/>
+	mr = new MediaRecorder();
+    mr.setAudioSource(MediaRecorder.AudioSource.MIC);  //音频输入源
+    mr.setOutputFormat(MediaRecorder.OutputFormat.AMR_WB);   //设置输出格式
+    mr.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);   //设置编码格式
+TelephonyManager
+	TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+	1 调用拨号器拨打电话号码
+	Uri uri=Uri.parse("tel:"+电话号码);    
+	Intent intent=new Intent(Intent.ACTION_DIAL,uri);    
+	startActivity(intent);  
+	<!-- 添加访问手机位置的权限 -->
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+	<!-- 添加访问手机状态的权限 -->
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+	<!-- 授予该应用读取通话状态的权限 -->  
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>  
+	<!-- 授予该应用控制通话的权限 -->  
+	<uses-permission android:name="android.permission.CALL_PHONE" />
+SmsManager
+	public void SendSMSTo(String phoneNumber,String message){    
+		//判断输入的phoneNumber是否为合法电话号码  
+		if(PhoneNumberUtils.isGlobalPhoneNumber(phoneNumber)){  
+			//Uri.parse("smsto") 这里是转换为指定Uri,固定写法  
+			Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+phoneNumber));        
+			intent.putExtra("sms_body", message);              
+			startActivity(intent);    
+		}    
+	}
+	调用系统提供的短信接口发送短信
+	uses-permission android:name="android.permission.SEND_SMS"/>   
+	sendTextMessage(destinationAddress, scAddress, text, sentIntent, deliverIntent);
+	
+public void sendSMS(String phoneNumber,String message){  
+    //获取短信管理器   
+    android.telephony.SmsManager smsManager = android.telephony.SmsManager.getDefault();  
+    //拆分短信内容（手机短信长度限制）,貌似长度限制为140个字符,就是
+    //只能发送70个汉字,多了要拆分成多条短信发送
+    //第四五个参数,如果没有需要监听发送状态与接收状态的话可以写null    
+    List<String> divideContents = smsManager.divideMessage(message);   
+    for (String text : divideContents) {    
+        smsManager.sendTextMessage(phoneNumber, null, text, sentPI, deliverPI);    
+    }  
+} 
+AudioManager(音频管理器)
+	AudioManager audiomanage = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+	adjustVolume(int direction, int flags)
+	setMicrophoneMute(boolean on)
+Vibrator(振动器)
+	Vibrator vb = (Vibrator)getSystemService(Service.VIBRATOR_SERVICE);
+	abstract void cancel()：关闭或者停止振动器
+	abstract boolean hasVibrator()：判断硬件是否有振动器
+	void vibrate(long milliseconds)：控制手机振动为milliseconds毫秒
+	void vibrate(long[] pattern,int repeat):指定手机以pattern指定的模式振动!
+AlarmManager(闹钟服务)
+	AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+	Type(闹钟类型)：ELAPSED_REALTIME: 闹钟在手机睡眠状态下不可用；ELAPSED_REALTIME_WAKEUP 闹钟在睡眠状态下会唤醒系统并执行提示功能；RTC_WAKEUP 表示闹钟在睡眠状态下会唤醒系统并执行提示功能；POWER_OFF_WAKEUP 表示闹钟在手机关机状态下也能正常进行提示功能；RTC 闹钟在睡眠状态下不可用
+PowerManager(电源服务)
+	PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+	PowerManager.WakeLock w1 = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "MyTag");
+	w1.acquire();
+	//在这个过程,屏幕会保持光亮!
+	w1.release();
+	<uses-permission android:name="android.permission.WAKE_LOCK"/>
+	<uses-permission android:name="android.permission.DEVICE_POWER"/>
+WindowManager(窗口管理服务)
+	①获得WindowManager对象:
+	WindowManager wManager = getApplicationContext().getSystemService(Context. WINDOW_ SERVICE);
+	②获得WindowManager.LayoutParams对象，为后续操作做准备
+	WindowManager.LayoutParams wmParams=new WindowManager.LayoutParams();
+	悬浮框的实现
+LayoutInflater(布局服务) 
+	一个用于加载布局的系统服务，就是实例化与Layout XML文件对应的View对象，不能直接使用， 需要通过getLayoutInflater( )方法或getSystemService( )方法来获得与当前Context绑定的 LayoutInflater实例
+WallpaperManager(壁纸管理器)
+	setBitmap(Bitmap bitmap)：将壁纸设置为bitmap所代表的位图
+	setResource(int resid)：将壁纸设置为resid资源所代表的图片
+	WallpaperManager wpManager =WallpaperManager.getInstance(this);
+	<uses-permission android:name="android.permission.SET_WALLPAPER"/> 
+传感器的使用套路
+	1 获得传感器管理器：SensorManager sm = (SensorManager)getSystemService(SENSOR_SERVICE); 
+	2 调用特定方法获得需要的传感器：Sensor mSensorOrientation = sm.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+	3 实现SensorEventListener接口，重写onSensorChanged和onAccuracyChanged的方法！
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+		final float[] _Data = event.values;
+		this.mService.onSensorChanged(_Data[0],_Data[1],_Data[2]);
+	}
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	}
+	4 SensorManager对象调用registerListener注册监听器：
+	ms.registerListener(mContext, mSensorOrientation, android.hardware.SensorManager.SENSOR_DELAY_UI);
+	5 监听器的取消注册：ms.registerListener(mContext, mSensorOrientation, android.hardware.SensorManager.SENSOR_DELAY_UI);
+方向传感器 --> 三维 X Y Z值 --> 指南针案例
+
+Android GPS
+	1 LocationManager
+	LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	2 LocationProvider(定位提供者)
+	3 Location(位置信息)
+	4 Criteria(过滤条件)：获取LocationProvider时，可以设置过滤条件，就是通过这个类来设置相关条件的~
+	
+	判断GPS是否可用
+	private boolean isGpsAble(LocationManager lm){
+		return lm.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER)?true:false;
+	}
+	
+	临近警告(地理围栏)：LocationManager的addProximityAlert方法添加临近警告
+
+
+
+
+

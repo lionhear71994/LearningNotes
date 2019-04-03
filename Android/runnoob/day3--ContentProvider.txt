@@ -1,0 +1,22 @@
+URI 通用资源标识符 
+URI提供一个parse()方法将字符串转换成URI
+
+使用系统提供的ContentProvider
+	通过ContentResolver进行读取
+	1) 来到系统源码文件下:all-src.rar -> TeleponeProvider -> AndroidManifest.xml查找对应API
+	2) 打开模拟器的file exploer/data/data/com.android.providers.contacts/databases/contact2.db 导出后使用SQLite图形工具查看，三个核心的表:raw_contact表，data表，mimetypes表！
+
+自定义ContentProvider(http://www.runoob.com/w3cnote/android-tutorial-contentprovider.html)
+	1) 继承ContentProvider
+	2) 重写方法onCreate()执行一次，用于初始化Provider；insert();delete();update();query()查询;getType()获得ContentProvider数据的MIMI类型
+	3) Manifest注册
+	4) 使用UriMatcher完成匹配
+		a) 初始化UriMatcher
+		b) 使用静态代码块，通过addURI方法将uri添加到matcher中，。。。（未完）
+	5) 使用ContentUtils类为Uri追加id或解析id
+	6) 在其他APP中调用getContentResolver()方法获取Resolver对象
+
+通过ContentObserver监听ContentProvider的数据变化
+    1) 继承ContentObserver
+	2) 重写onChange方法
+	3) 调用getContentResolver().registerContentObserver()注册监听器	

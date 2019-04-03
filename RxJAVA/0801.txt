@@ -1,0 +1,78 @@
+RxJava有四个基本概念：Observable (可观察者，即被观察者)、Observer (观察者)、 subscribe (订阅)、事件。
+Observable 和 Observer 通过 subscribe() 方法实现订阅关系，从而 Observable 可以在需要的时候发出事件来通知 Observer。
+
+RxJava 的事件回调方法除了普通事件onNext()之外，还定义了两个特殊的事件：onCompleted() 和 onError()。
+
+RxJava 的基本实现主要有三点：
+1）创建 Observer(Subscriber):实现接口，重写onNext() onCompleted() 和 onError().
+	Observer 和 Subscriber的区别：
+	a) onStart():Subscriber 增加的方法。它会在 subscribe 刚开始，而事件还未发送之前被调用.
+	b) unsubscribe(): Subscriber 所实现的另一个接口 Subscription 的方法，用于取消订阅。
+	
+2) 创建 Observable：RxJava 使用 create() 方法来创建一个 Observable ，并为它定义事件触发规则。OnSubscribe 会被存储在返回的 Observable 		对象中，它的作用相当于一个计划表，当 Observable 被订阅的时候，OnSubscribe 的 call() 方法会自动被调用。
+	Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
+    @Override
+    public void call(Subscriber<? super String> subscriber) {
+        subscriber.onNext("Hello");
+        subscriber.onNext("Hi");
+        subscriber.onNext("Aloha");
+        subscriber.onCompleted();
+		}
+	});
+	RxJava 还提供了一些方法用来快捷创建事件队列：
+	just(T...)	from(T[]) / from(Iterable<? extends T>)	
+3) Subscribe (订阅)：observable.subscribe(observer);	或者	observable.subscribe(subscriber);
+	subscribe方法做了三件事：1、onStart() 2、调用 Observable 中的 OnSubscribe.call(Subscriber) 3、将传入的 Subscriber 作为 Subscription 返回。
+	
+	subscribe() 还支持不完整定义的回调
+	observable.subscribe(onNextAction);    ActionX接口
+	
+线程控制 —— Scheduler (一)
+	Schedulers.immediate()
+	Schedulers.newThread()
+	Schedulers.io()
+	Schedulers.computation()
+	AndroidSchedulers.mainThread()
+	Observable.just(1, 2, 3, 4)
+    .subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
+    .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
+	
+变换：RxJava 提供了对事件序列进行变换的支持，这是它的核心功能之一:
+	map(): 事件对象的直接变换
+	Observable.just("images/logo.png") // 输入类型 String
+    .map(new Func1<String, Bitmap>() {
+        @Override
+        public Bitmap call(String filePath) { // 参数类型 String
+            return getBitmapFromPath(filePath); // 返回类型 Bitmap
+        }
+    })
+    .subscribe(new Action1<Bitmap>() {
+        @Override
+        public void call(Bitmap bitmap) { // 参数类型 Bitmap
+            showBitmap(bitmap);
+        }
+    });
+	
+	FuncX 和 ActionX 的区别在 FuncX 包装的是有返回值的方法
+	
+	flatMap():
+	Observable.from(students)
+    .flatMap(new Func1<Student, Observable<Course>>() {
+        @Override
+        public Observable<Course> call(Student student) {
+            return Observable.from(student.getCourses());
+        }
+    })
+    .subscribe(subscriber);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

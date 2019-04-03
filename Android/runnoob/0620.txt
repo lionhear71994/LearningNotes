@@ -1,0 +1,389 @@
+SharedPreferences用户偏好参数
+	保存数据：
+	SharedPreferences sp = mContext.getSharedPreferences("mysp", Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor = sp.edit();
+    editor.putString("username", username);
+    editor.putString("passwd", passwd);
+    editor.commit();
+	读取SP文件：
+	Map<String, String> data = new HashMap<String, String>();
+    SharedPreferences sp = mContext.getSharedPreferences("mysp", Context.MODE_PRIVATE);
+    data.put("username", sp.getString("username", ""));
+    data.put("passwd", sp.getString("passwd", ""));
+	
+读取其他应用的SharedPreferences
+	//获得第一个应用的包名,从而获得对应的Context,需要对异常进行捕获
+    try {
+        othercontext = createPackageContext("com.jay.sharedpreferencedemo", Context.CONTEXT_IGNORE_SECURITY);
+    } catch (PackageManager.NameNotFoundException e) {
+        e.printStackTrace();
+    }
+    //根据Context取得对应的SharedPreferences
+    sp = othercontext.getSharedPreferences("mysp", Context.MODE_WORLD_READABLE);
+	
+使用MD5对SharedPreference的重要数据进行加密
+public class MD5 {
+    public static String getMD5(String content) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("MD5");
+            digest.update(content.getBytes());
+            return getHashString(digest);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static String getHashString(MessageDigest digest) {
+        StringBuilder builder = new StringBuilder();
+        for (byte b : digest.digest()) {
+            builder.append(Integer.toHexString((b >> 4) & 0xf));
+            builder.append(Integer.toHexString(b & 0xf));
+        }
+        return builder.toString();
+    }
+}
+-------------------------------------------------------------------------
+SharedPreference工具类
+package com.jay.sharedpreferencedemo3;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import java.util.Map;
+
+/**
+ * Created by Jay on 2015/9/2 0002.
+ */
+public class SPUtils {
+    /**
+     * 保存在手机里的SP文件名
+     */
+    public static final String FILE_NAME = "my_sp";
+
+    /**
+     * 保存数据
+     */
+    public static void put(Context context, String key, Object obj) {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        if (obj instanceof Boolean) {
+            editor.putBoolean(key, (Boolean) obj);
+        } else if (obj instanceof Float) {
+            editor.putFloat(key, (Float) obj);
+        } else if (obj instanceof Integer) {
+            editor.putInt(key, (Integer) obj);
+        } else if (obj instanceof Long) {
+            editor.putLong(key, (Long) obj);
+        } else {
+            editor.putString(key, (String) obj);
+        }
+        editor.commit();
+    }
+
+
+    /**
+     * 获取指定数据
+     */
+    public static Object get(Context context, String key, Object defaultObj) {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, context.MODE_PRIVATE);
+        if (defaultObj instanceof Boolean) {
+            return sp.getBoolean(key, (Boolean) defaultObj);
+        } else if (defaultObj instanceof Float) {
+            return sp.getFloat(key, (Float) defaultObj);
+        } else if (defaultObj instanceof Integer) {
+            return sp.getInt(key, (Integer) defaultObj);
+        } else if (defaultObj instanceof Long) {
+            return sp.getLong(key, (Long) defaultObj);
+        } else if (defaultObj instanceof String) {
+            return sp.getString(key, (String) defaultObj);
+        }
+        return null;
+    }
+
+    /**
+     * 删除指定数据
+     */
+    public static void remove(Context context, String key) {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.remove(key);
+        editor.commit();
+    }
+
+
+    /**
+     * 返回所有键值对
+     */
+    public static Map<String, ?> getAll(Context context) {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, context.MODE_PRIVATE);
+        Map<String, ?> map = sp.getAll();
+        return map;
+    }
+
+    /**
+     * 删除所有数据
+     */
+    public static void clear(Context context) {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
+        editor.commit();
+    }
+
+    /**
+     * 检查key对应的数据是否存在
+     */
+    public static boolean contains(Context context, String key) {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, context.MODE_PRIVATE);
+        return sp.contains(key);
+    }
+
+}
+-------------------------------------------------------------------------------------------------
+使用SQLiteOpenHelper类创建数据库与版本管理
+	myDBHelper = new MyDBOpenHelper(mContext, "my.db", null, 1);
+	@Override
+    //数据库第一次创建时被调用
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE person(personid INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR(20))");        
+    }
+    //软件版本号发生改变时调用
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("ALTER TABLE person ADD phone VARCHAR(12) NULL");
+    }
+	
+使用Android提供的API操作SQLite
+	插入：
+	db = myDBHelper.getWritableDatabase();
+	//参数依次是：表名，强行插入null值得数据列的列名，一行记录的数据
+    db.insert("person", null, values1);
+	查询：			
+	sb = new StringBuilder();
+    //参数依次是:表名，列名，where约束条件，where中占位符提供具体的值，指定group by的列，进一步约束
+    //指定查询结果的排序方式
+    Cursor cursor = db.query("person", null, null, null, null, null, null);
+    if (cursor.moveToFirst()) {
+        do {
+            int pid = cursor.getInt(cursor.getColumnIndex("personid"));
+            String name = cursor.getString(cursor.getColumnIndex("name"));
+            sb.append("id：" + pid + "：" + name + "\n");
+        } while (cursor.moveToNext());
+    }
+    cursor.close();
+	改：
+	db.update("person", values2, "name = ?", new String[]{"呵呵~2"});
+	删：
+	db.delete("person", "personid = ?", new String[]{"3"});
+	
+使用SQL语句操作
+	public void save(Person p)
+	{
+    SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+    db.execSQL("INSERT INTO person(name,phone) values(?,?)",
+                new String[]{p.getName(),p.getPhone()});
+	}
+	
+SQLite事务、
+	db.beginTransaction();
+	try{
+		db.execSQL("INSERT INTO person(name,phone) values(?,?)");
+		db.execSQL("同时事务操作");
+		db.setTransactionSuccessful();	//标记事务成功
+	}finally{
+		db.endTransaction();		//结束事务
+	}
+---------------------------------------------------------------------------------------------------------------------------
+WebView
+	webView = new WebView(this);
+    webView.setWebViewClient(new WebViewClient() {
+    //设置在webView点击打开的新网页在当前界面显示,而不跳转到新的浏览器中
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+    });
+    webView.getSettings().setJavaScriptEnabled(true);  //设置WebView属性,运行执行js脚本
+    webView.loadUrl("http://www.baidu.com/");          //调用loadUrl方法为WebView加入链接
+    setContentView(webView);                           //调用Activity提供的setContentView将webView显示出来
+监听滚动事件一般都是设置setOnScrollChangedListener，可惜的是 WebView并没有给我们提供这样的方法，但是我们可以重写WebView，覆盖里面的一个方法： protected void onScrollChanged(final int l, final int t, final int oldl,final int oldt){},然后再对外提供一个接口
+设置缩放以及自适应屏幕
+	WebSettings settings = wView.getSettings();
+	settings.setUseWideViewPort(true);//设定支持viewport
+	settings.setLoadWithOverviewMode(true);   //自适应屏幕
+	settings.setBuiltInZoomControls(true);
+	settings.setDisplayZoomControls(false);
+	settings.setSupportZoom(true);//设定支持缩放
+获取WebView的Cookie数据	
+	@Override
+	public void onPageFinished(WebView view, String url) {             
+		CookieManager cookieManager = CookieManager.getInstance();
+		String CookieStr = cookieManager.getCookie(url);
+		Log.e("HEHE", "Cookies = " + CookieStr);
+		super.onPageFinished(view, url);
+	}
+设置WebView的Cookie数据
+	CookieSyncManager.createInstance(MainActivity.this);  
+	CookieManager cookieManager = CookieManager.getInstance();  
+	cookieManager.setAcceptCookie(true);  
+	cookieManager.setCookie(url, cookies);  //cookies是要设置的cookie字符串 
+	CookieSyncManager.getInstance().sync();
+	上述代码需要写在loadUrl()之前
+WebView和JavaScrip交互
+	首先，我们定义一个类，用于将数据暴露出来，JS通过该类暴露的方法(Public)来调用Android！
+	接着，我们在WebView所在页面Activity，使用下述代码:
+	webview.getSettings().setJavaScriptEnabled(true);
+	webview.addJavascriptInterface(object,"name");
+	然后js或者html中调用name.xxx调用对象里的暴露的方法：
+	!!!setJavaScriptEnabled是在Android 4.4以前的系统才有效!!!
+Android 4.4后WebView
+	1 使用runOnUiThread()方法来保证你关于 WebView的操作是在UI线程中进行
+	2 evaluateJavascript()方法:专门用于异步调用JavaScript方法，并且能够得到一个回调结果
+WebView文件下载
+	1 调用其它浏览器下载
+	wView.setDownloadListener(new DownloadListener(){
+	@Override
+	public void onDownloadStart(String url, String userAgent, String contentDisposition, 
+		String mimetype, long contentLength) {
+			Log.e("HEHE","开始下载");
+			Uri uri = Uri.parse(url);
+			Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+			startActivity(intent);
+		}
+	});
+	2 自己写线程下载
+	public class DownLoadThread implements Runnable {
+
+    private String dlUrl;
+
+    public DownLoadThread(String dlUrl) {
+        this.dlUrl = dlUrl;
+    }
+
+    @Override
+    public void run() {
+        Log.e("HEHE", "开始下载~~~~~");
+        InputStream in = null;
+        FileOutputStream fout = null;
+        try {
+            URL httpUrl = new URL(dlUrl);
+            HttpURLConnection conn = (HttpURLConnection) httpUrl.openConnection();
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+            in = conn.getInputStream();
+            File downloadFile, sdFile;
+            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+                Log.e("HEHE","SD卡可写");
+                downloadFile = Environment.getExternalStorageDirectory();
+                sdFile = new File(downloadFile, "csdn_client.apk");
+                fout = new FileOutputStream(sdFile);
+            }else{
+                Log.e("HEHE","SD卡不存在或者不可读写");
+            }
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = in.read(buffer)) != -1) {
+                fout.write(buffer, 0, len);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (fout != null) {
+                try {
+                    fout.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        Log.e("HEHE", "下载完毕~~~~");
+    }
+	}
+WebView缓存问题
+		WebSettings settings = wView.getSettings();
+		settings.setJavaScriptEnabled(true);
+         //设置缓存模式
+        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        // 开启DOM storage API 功能
+        settings.setDomStorageEnabled(true);
+        // 开启database storage API功能
+        settings.setDatabaseEnabled(true);
+        String cacheDirPath = getFilesDir().getAbsolutePath() + APP_CACHE_DIRNAME;
+        Log.i("cachePath", cacheDirPath);
+        // 设置数据库缓存路径
+        settings.setAppCachePath(cacheDirPath);
+        settings.setAppCacheEnabled(true);
+        Log.i("databasepath", settings.getDatabasePath());
+删除缓存
+	wView.clearCache(true);
+	setting.setCacheMode(WebSettings.LOAD_NO_CACHE);
+	deleteDatabase("WebView.db");和deleteDatabase("WebViewCache.db");
+	webView.clearHistory();
+	webView.clearFormData();
+	getCacheDir().delete();
+WebView处理网页返回的错误码信息
+1.页面错误，加载自定义网页：
+	wView.setWebViewClient(new WebViewClient() {
+		//设置在webView点击打开的新网页在当前界面显示,而不跳转到新的浏览器中
+		@Override
+		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+		view.loadUrl(url);
+		return true;
+		}
+
+		@Override
+		public void onReceivedError(WebView view, int errorCode, String description,
+		String failingUrl) {
+			super.onReceivedError(view, errorCode, description, failingUrl);
+			wView.loadUrl("file:///android_asset/error.html");
+		}
+	});
+2.页面错误，显示相应的View
+			@Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                super.onReceivedError(view, errorCode, description, failingUrl);
+                wView.setVisibility(View.GONE);
+                img_error_back.setVisibility(View.VISIBLE);
+			}
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+

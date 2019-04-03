@@ -1,0 +1,40 @@
+一、
+
+二、内联样式）Inline style > （内部样式）Internal style sheet >（外部样式）External style sheet > 浏览器默认样式
+
+三、背景
+	body {background-color:#b0c4de;}
+
+四、文本格式
+
+五、字体
+
+六、链接样式
+
+七、列表样式
+
+八、CSS 盒子模型(Box Model)
+	Margin(外边距) - 清除边框外的区域，外边距是透明的。
+	Border(边框) - 围绕在内边距和内容外的边框。
+	Padding(内边距) - 清除内容周围的区域，内边距是透明的。
+	Content(内容) - 盒子的内容，显示文本和图像。
+	
+九、嵌套选择器
+	p{ }: 为所有 p 元素指定一个样式。
+	.marked{ }: 为所有 class="marked" 的元素指定一个样式。
+	.marked p{ }: 为所有 class="marked" 元素内的 p 元素指定一个样式。
+	p.marked{ }: 为所有 class="marked" 的 p 元素指定一个样式。
+	
+十、overflow
+
+十一、float
+
+十二、在 CSS3 中包含了四种组合方式:
+	后代选择器(以空格分隔)
+	子元素选择器(以大于号分隔）
+	相邻兄弟选择器（以加号分隔）
+	普通兄弟选择器（以破折号分隔）
+	
+十三、
+
+	

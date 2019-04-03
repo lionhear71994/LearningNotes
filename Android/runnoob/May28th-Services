@@ -1,0 +1,42 @@
+一、概述
+    onStartCommand()
+    onBind()
+    onCreate()
+    onDestroy()
+ 
+二 、在manifest中声明服务
+    android:exported属性并且设置为"false"， 可以确保该服务是你应用程序的私有服务。
+    
+三 、创建一个started服务
+    startService() -> onStartCommand() -> StopSelf()/StopService
+    IntentService,实现onHandleIntent()
+ 
+四 、扩展IntentService类
+    一个构造方法和一个onHandleIntent()方法的实现。
+    
+五 、扩展Service类
+    onStartCommand()的返回值必须是以下常量之一：
+    START_NOT_STICKY: 如果系统在onStartCommand()返回后杀死了服务，则不会重建服务了，除非还存在未发送的intent。 当服务不再是必需的，并且应用程序能够简单地重启那些未完成的工作时，这是避免服务运行的最安全的选项。
+    START_STICKY :如果系统在onStartCommand()返回后杀死了服务，则将重建服务并调用onStartCommand()，但不会再次送入上一个intent， 而是用null intent来调用onStartCommand() 。除非还有启动服务的intent未发送完，那么这些剩下的intent会继续发送。 这适用于媒体播放器（或类似服务），它们不执行命令，但需要一直运行并随时待命。
+    START_REDELIVER_INTENT :如果系统在onStartCommand()返回后杀死了服务，则将重建服务并用上一个已送过的intent调用onStartCommand()。任何未发送完的intent也都会依次送入。这适用于那些需要立即恢复工作的活跃服务，比如下载文件。
+ 
+六 、创建一个bound服务
+    bindService() ，实现onBind()，调用bindService()，unbindService()
+     ServiceConnection
+    
+七 、前台运行服务
+    前台服务必须提供一个状态栏通知。
+    startForeground()方法。此方法有两个参数：唯一标识通知的整数值、状态栏通知Notification对象。
+    stopForeground()
+ 
+八 、生命周期回调方法
+    onCreate()  onStartCommand  onBind  onUnbind  onRebind  onDestroy
+ 
+九 、Messenger的使用方法:
+    服务实现一个Handler ，用于客户端每次调用时接收回调。
+    此Handler用于创建一个Messenger对象（它是一个对Handler的引用)。
+    此Messenger对象创建一个IBinder，服务在onBind()中把它返回给客户端。
+    客户端用IBinder将Messenger（引用服务的Handler）实例化，客户端用它向服务发送消息对象Message。
+    服务接收Handler中的每个消息Message——确切的说，是在handleMessage()方法中接收。
+ 
+十 、AIDL

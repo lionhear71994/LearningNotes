@@ -1,0 +1,14 @@
+线程同步问题：
+	synchronized(对象){}
+	该对象是同一个对象：private Object obj = new Object();
+	
+	new ArrayList //线程不安全
+	new Collections.synchronizedList(new ArrayList)  //线程安全
+	
+	Lock接口：  void lock()
+				void unlock()
+	已知实现类ReentrantLock  Lock lock = new ReentrantLock();
+	
+	生产者消费者模型
+	Object.wait()  等待
+	Object.notify() / notifyAll() 唤醒单个/全部线程

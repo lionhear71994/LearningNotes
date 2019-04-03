@@ -1,0 +1,35 @@
+task 是多个 activity 的集合，用户进行操作时将与这些 activity 进行交互。 这些 activity 按照启动顺序排队存入一个栈（即“back stack”）。
+
+一 、保存Activity状态
+    onSaveInstanceState()
+
+二 、管理多个Task
+     <activity> 属性主要有：
+        taskAffinity
+        launchMode
+        allowTaskReparenting
+        clearTaskOnLaunch
+        alwaysRetainTaskState
+        finishOnTaskLaunch
+    可用的 intent 标志主要有：
+        FLAG_ACTIVITY_NEW_TASK
+        FLAG_ACTIVITY_CLEAR_TOP
+        FLAG_ACTIVITY_SINGLE_TOP
+ 
+三 、定义启动模式
+    使用 manifest 文件:<activity> 元素的 launchMode 属性,standard,singletop,singletask,singleinstance
+    使用 Intent 标志:FLAG_ACTIVITY_NEW_TASK,FLAG_ACTIVITY_CLEAR_TOP,FLAG_ACTIVITY_SINGLE_TOP
+    
+四 、处理affinity
+    <activity> 元素的taskAffinity 属性
+    a) 当启动 activity 的 intent 包含了FLAG_ACTIVITY_NEW_TASK标志。
+    b) 当一个 activity 的allowTaskReparenting属性设为 "true"。
+ 
+五 、清理back stack
+    alwaysRetainTaskState，clearTaskOnLaunch，finishOnTaskLaunch
+    
+六 、启动task
+    
+  
+  
+   

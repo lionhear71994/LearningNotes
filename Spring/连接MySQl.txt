@@ -1,0 +1,5 @@
+1 gradle依赖
+2 配置：用户，权限，jdbc
+3 Bean类
+4 repository CurdRepository
+5 Controller

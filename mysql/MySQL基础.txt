@@ -1,0 +1,52 @@
+1、语句中的SELECT和FROM语句是必须的，其他部分是可选的。
+	1、从表中查询数据时，可能会收到重复的行记录。为了删除这些重复行，可以在SELECT语句中使用DISTINCT子句；
+	2、如果列具有NULL值，并且对该列使用DISTINCT子句，MySQL将保留一个NULL值，并删除其它的NULL值，因为DISTINCT子句将所有NULL值视为相同的值
+	3、多个列的DISTINCT子句：在这种情况下，MySQL单列可重复，组合唯一
+	4、DISTINCT子句是GROUP BY子句的特殊情况。 DISTINCT子句和GROUP BY子句之间的区别是GROUP BY子句可对结果集进行排序，而DISTINCT子句不进行排序
+	5、使用具有聚合函数(例如SUM，AVG和COUNT)的DISTINCT子句中，在MySQL将聚合函数应用于结果集之前删除重复的行
+	6、DISTINCT与LIMIT子句，先唯一，后限制
+
+2、in: 指定的值是否与列表中的值或子查询中的任何值匹配。  --相当于多重WHERE
+	WHERE country IN ('USA' , 'France');
+	
+3、between: expr [NOT] BETWEEN begin_expr AND end_expr;   --注意与日期类型数据联用
+
+4、like: WHERE col LIKE 'Li_nH%'            
+	'%\_20%' 匹配'_20'的字段，ESCAPE可变换转义字符'\'至任意符号
+	'%'匹配任意个数字符  '_'匹配单个任意字符
+	
+5、limit:  LIMIT offset , count;
+	offset参数指定要返回的第一行的偏移量。第一行的偏移量为0，而不是1。
+	count指定要返回的最大行数。
+	LIMIT子句经常与ORDER BY子句一起使用。首先，使用ORDER BY子句根据特定条件对结果集进行排序，然后使用LIMIT子句来查找最小或最大值。
+	
+6、order by: 
+	自定义排序： ORDER BY FIELD(status,'In Process','On Hold','Cancelled','Resolved','Disputed','Shipped');
+	
+7、子查询(嵌套查询)：
+
+8、exists: 有返回任何行，则EXISTS子查询返回TRUE，否则返回FALSE。
+
+9、INTERSECT(交集)运算符: 两个查询结果的交集。
+
+10、索引：加快查询数据，但是减慢了修改数据的速度。
+	主键：primary key   唯一索引：unique
+	
+11、外键： 
+	CONSTRAINT constraint_name                  --外建名
+	FOREIGN KEY foreign_key_name (columns)      --外键父引用列
+	REFERENCES parent_table(columns)			--外键子引用列		   
+	ON DELETE action							--父引用删除时子引用操作
+	ON UPDATE action							--类似上
+	
+12、连接：
+	INNER JOIN（内连接,或等值连接）：获取两个表中字段匹配关系的记录。
+	LEFT JOIN（左连接）：获取左表所有记录，即使右表没有对应匹配的记录。
+	RIGHT JOIN（右连接）： 与 LEFT JOIN 相反，用于获取右表所有记录，即使左表没有对应匹配的记录。
+	CROSS JOIN子句从连接的表返回行的笛卡儿乘积。
+	
+13、事务
+	START TRANSACTION， ROLL BACK , COMMIT
+	
+14、函数
+	https://www.yiibai.com/mysql/functions.html

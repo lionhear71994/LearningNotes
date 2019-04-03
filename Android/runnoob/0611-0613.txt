@@ -1,0 +1,116 @@
+June 11th
+    我始终认为写日记是一个好习惯，但是我没能坚持下来，在手机上，所以我restart这个习惯，用来督促自己，在电脑上，也养成了打开电脑接收新知识的习惯，但是这并不是日记，I'd rather than call it Learing Notes.因为日记可以记录一些private，但是github's private should pay,so,I won't write private,just notes.Maybe I can just Noting by using Englisjh,partice English? Below here is what I learnd today.    
+    
+    1、ListView是一个像列表一样的组件，它需要创建一个layout,用来放一列的布局，在用另一个layout，用Adapter加载列布局到ListView布局
+    2、然后是一些对自定义BaseAdapter的优化：复用ConvertView，自定义ViewHolder类，ListView之checkbox错位问题解决
+    3、ListView的数据更新：在自定义Adapter类中加入添加数据和删减数据的方法
+    
+    That's all for today,I knew it's slow,but notes can help me.
+    
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+June 12th
+    Let's just go directly
+    1、可复用BaseAdapter：将Entity设置成泛型，ViewHolder类的升级改造，定义一个抽象方法，完成ViewHolder与Data数据集的绑定，修改getView()部分的内容。
+    2、ListView Item多布局的实现：重写getItemViewType()方法对应View是哪个类别，以及getViewTypeCount()方法iew返回 总共多少个类别！然后再getView那里调用getItemViewType获得对应类别，再加载对应的View！
+    3、GridView：网格视图，就像安卓桌面的每个应用的格子。
+    4、Spinner：列表选择框，onItemSelected()获得选中项的值.
+    5、AutoCompleteTextView:输入框自动补齐，全匹配。
+    6、ExpandableListView：重写BaseExpandableListAdpter，分组之后的列表。
+    7、ViewFlipper：静态导入，写入xml文件，动态导入，触发MyGestureListener里的方法。
+    8、Toast：Toast.makeText(MainActivity.this, "提示的内容", Toast.LENGTH_LONG).show(); 构造方法来定制Toast。
+    9、Notification:NotificationManager mNManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);Notification.Builder mBuilder = new Notification.Builder(this);notify().
+    10、AlertDialog：普通、单选、复选、通过Builder的setView()定制显示的AlertDialog，进度条对话框，时间选择对话框。
+    11、PopupWindow：QQ里面长按的删除悬浮框。
+    12、Menu：OptionMenu，ContextMenu，SubMenu，PopupMenu。
+    13、监听五种不同的使用形式：匿名内部类，内部类，外部类，当前类实现方法，绑定到xml文件。
+    14、回调的事件处理机制：自定义view，基于回调的事件传播，传播的顺序是: 监听器--->view组件的回调方法--->Activity的回调方法了。
+    15、Handler：Looper.prepare()，重写handleMessage( )，Looper.loop()
+________________________________________________________________________________________________________________________________________June 13th 
+    Today is Thursday,
+    
+    1 TouchListener是基于监听的，而OnTouchEvent则是基于回调的.event.getAction( ),
+    2 多点专用的操作：MotionEvent.ACTION_POINTER_DOWN,MotionEvent.ACTION_POINTER_UP
+    3 监听EditText的内容变化:TextWatcher:EditText.addTextChangedListener(mTextWatcher),密码不可见案例
+    4 响应系统设置的事件：Configuration类-重写onConfigurationChanged
+    5 AsyncTask：继承AsyncTask然后重写相关方法
+    6 Gestures：
+        1.手指触碰屏幕时，触发MotionEvent事件！
+        2.该事件被OnTouchListener监听，可在它的onTouch()方法中获得该MotionEvent对象！
+        3.通过GestureDetector转发MotionEvent对象给OnGestureListener
+        4.我们可以通过OnGestureListener获得该对象，然后获取相关信息，以及做相关处理
+________________________________________________________________________________________________________________________________________
+June 14th
+    a) Activity: 
+        1 启动方式，通过Intent的ComponentName
+        2 横竖屏切换，android:screenOrientation
+        3 状态保存：onSaveInstanceState，onRestoreInstanceState
+        4 随时关闭所有Activity
+        5 完全退出App的方法
+        6 双击退出程序
+        7 为Activity设置过场动画
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

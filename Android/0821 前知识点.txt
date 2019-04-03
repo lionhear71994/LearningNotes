@@ -1,0 +1,24 @@
+WebView与JS交互
+	webview.getSettings().setJavaScriptEnabled(true);
+	webview.addJavascriptInterface(object,"name");
+	webView.evaluateJavascript(script, new ValueCallback<String>() {
+	@Override
+	public void onReceiveValue(String value) {
+	}
+	});
+	
+SharedPreferences
+	获取
+	Context context = getActivity();
+	SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+	OR
+	SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+	写
+	SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+	SharedPreferences.Editor editor = sharedPref.edit();
+	editor.putInt(getString(R.string.saved_high_score), newHighScore);
+	editor.commit();
+	读
+	SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+	int defaultValue = getResources().getInteger(R.string.saved_high_score_default);
+	long highScore = sharedPref.getInt(getString(R.string.saved_high_score), default);

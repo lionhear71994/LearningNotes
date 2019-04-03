@@ -1,0 +1,17 @@
+AndroidStudio快捷键
+优化导入的包	Ctrl+Alt+O
+多行注释	Ctrl+Shit+/
+快速定位到文件错误或警告位置	F2
+直接进入源码	F4
+快速重写方法 override	Ctrl+O
+
+有些时候会发现导入之后在运行按钮左边显示不出Module来，可能是你导入之前的SDK版本不同导致的，只要在build.gradle中配置相应的SDK版本就可以了。
+android {
+ 	compileSdkVersion 19
+ 	buildToolsVersion "21.1.1"
+ 	...
+ 	}
+	
+AndroidStudio版本控制 https://github.com/CharonChui/AndroidNote/blob/master/AndroidStudioCourse/AndroidStudio%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B(%E7%AC%AC%E4%B8%89%E5%BC%B9).md
+
+

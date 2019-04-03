@@ -1,0 +1,31 @@
+1、标签
+
+2、HTML 属性 <a herf="www.baidu.com">这是一个链接</a>      --herf是属性
+	属性可以在元素中添加附加信息
+	属性一般描述于开始标签
+	属性总是以名称/值对的形式出现，比如：name="value"。
+	
+3、文本格式化
+	<code>	定义计算机代码	
+	<strong>	定义加重语气...
+	
+4、头部
+	<title>  名称
+	<base> 标签描述了基本的链接地址/链接目标，该标签作为HTML文档中所有的链接标签的默认链接
+	<link> 标签定义了文档与外部资源之间的关系。<link> 标签通常用于链接到样式表: <link rel="stylesheet" type="text/css" href="mystyle.css">
+	
+5、区块
+	块级元素:<h1>, <p>, <ul>, <table>
+	内联元素: <b>, <td>, <a>, <img>
+	<div> 元素是块级元素，它可用于组合其他 HTML 元素的容器。
+	<span> 用来组合文档中的行内元素， 内联元素(inline)
+	布局模板
+	
+6、表单<form>
+	文本框、密码框、RadioButton、CheckBox、submit
+	
+7、<iframe src="URL"></iframe>
+
+8、http://www.runoob.com/html/html-quicklist.html
+	
+	

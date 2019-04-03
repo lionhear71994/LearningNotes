@@ -1,0 +1,35 @@
+https://start.spring.io/
+
+AOP
+拦截器Aspect
+designators指示器
+	匹配方法： execution()
+	匹配注解： target() args() within() annotation()
+	匹配包/类型： within()
+	匹配对象： this() bean() target()
+	匹配参数: args()
+	
+@SpringBootApplication = @Configuration + @EnableAutoConfiguration + @ComponentScan
+@RestController = @Controller + @ResponseBody
+
+统一异常处理：
+	在class注解上@ControllerAdvice,在方法上注解上@ExceptionHandler(value = Exception.class)。
+	
+JPA: 
+	@Entity,extends CrudRepository，
+	@Resource
+	private JdbcTemplate jdbcTemplate;
+	
+Serverlet：	1、代码注册		2、注解扫描
+	serverlet过滤器与监听器
+
+文件上传/下载
+	
+
+
+
+	
+
+
+
+

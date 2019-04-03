@@ -1,0 +1,114 @@
+栈：固定端进行数据结点的插入及删除，先进后出
+
+队列： 与栈类似。在一段进行插入(队尾)，另一端进行删除操作(队头)
+
+链表： 数据节点包括数据域和引用域两部分，引用域包含下一个数据结点存放地址
+
+树： 非线性结构，n个结点的有穷集合K，有且仅有一个根节点
+
+
+冒泡排序：
+	依次比较各元素，小的放前面
+	for(int i = 0;i < a.length; i++){
+		for(int j = 0;j < a.length; j++){
+			if (a[j] > a [j+1]) {
+				temp = a[j];
+				a[j] = a[j+1];
+				a[j+1] = temp;
+			}
+		}
+	}
+	
+选择排序：
+	找到N个数据中最小的放在第一个位置，然后从N-1个数据中找出最小的放在第二个位置。。。
+	for(int i = 0; i < a.length; i++){
+		int index = i;
+		for(int j = i+1; j < a.length; j++){
+			if(a[j] < a[index])
+				index = j;
+		}
+		if(index != i){
+			temp = a[i];
+			a[i] = a[index];
+			a[index] = temp;
+		}
+	}
+	
+插入排序：
+	排好前2个数的位置，第三个数插入到排好的数据中，第四个数在插入，以此类推
+	
+快速排序：
+	分界值，小的放左边，大的放右边
+	//left数组第一个序号，right为数组最大序号
+	void quickSort(){arr[] ,int left, int right}{
+		int f,t;
+		int ltemp,rtemp;
+		
+		f = arr[(left+right)/2];
+		ltemp=left;
+		rtemp=right;
+		
+		while(ltemp<rtemp){
+			while(arr[ltemp] < f){
+				++ltemp;
+			}
+			while(arr[rtemp] > f){
+				--rtemp;
+			}
+			if(ltemp <= rtemp){
+				t=arr[ltemp];
+				arr[rtemp] = t;
+				arr[ltemp] = arr[rtemp];
+				--rtemp;
+				++ltemp;
+			}
+			if(ltemp == rtemp){
+				ltemp++;
+			}
+			if(left < rtemp){
+				quickSort(arr,left,ltemp-1);
+			}
+			if(right > ltemp){
+				quickSort(arr,rtemp+1,right);
+			}			
+		}
+		
+二分查找
+	min,mid,max三个数组序号,以及a[]是经过排序的数组
+	
+int serch(a[],int target, int min){
+	int min,mid,max;
+	min = 0;
+	max = a.length - 1;
+	mid = (min+max)/2
+	
+	while(min <= max){
+		if(target == a[mid]){
+			return mid;
+		}else if(target > a[mid]){
+			min = mid+1;
+		}else{
+			max = mid-1;
+			}		
+		}
+		return -1;
+	}
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}

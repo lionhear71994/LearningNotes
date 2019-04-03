@@ -1,0 +1,5 @@
+在安装的时候，Android会给每个程序分配一个不同的Linux用户身份(UID)。
+
+AndroidManifest.xml中使用一个或多个permission标签声明
+protectionLevel属性是必选的，它告诉系统当其它应用程序需要该权限时怎样通知用户或者谁可以使用该权限。
+permissionGroup属性是可选的，用于帮助系统展示权限给用户。

@@ -1,0 +1,48 @@
+一、lamda
+(param) -> {statement};
+lambda表达式的重要特征:
+可选类型声明：不需要声明参数类型，编译器可以统一识别参数值。
+可选的参数圆括号：一个参数无需定义圆括号，但多个参数需要定义圆括号。
+可选的大括号：如果主体包含了一个语句，就不需要使用大括号。
+可选的返回关键字：如果主体只有一个表达式返回值则编译器会自动返回值，大括号需要指定明表达式返回了一个数值。
+
+lambda 表达式只能引用标记了 final 的外层局部变量，这就是说不能在 lambda 内部修改定义在域外的局部变量，否则会编译错误。
+
+二、函数式接口(Functional Interface)就是一个有且仅有一个抽象方法，但是可以有多个非抽象方法的接口。
+
+三、JAVA8方法引用
+Class<T>::new
+instances.forEach( Class::method ) instance::method
+
+四、默认方法与静态默认方法
+public interface vehicle {
+   default void print(){
+      System.out.println("我是一辆车!");
+   }
+}
+
+五、Java 8 Stream
+Java 8 中, 集合接口有两个方法来生成流：
+stream() − 为集合创建串行流。
+parallelStream() − 为集合创建并行流。
+forEach
+map
+filter
+limit
+sorted
+parallel
+
+六、Optional类是一个可以为null的容器对象。如果值存在则isPresent()方法会返回true，调用get()方法会返回该对象。
+Optional 是个容器：它可以保存类型T的值，或者仅仅保存null。Optional提供很多有用的方法，这样我们就不用显式进行空值检测。
+Optional 类的引入很好的解决空指针异常。
+
+七、Nashorn JavaScript
+JAVA与JS的交互
+
+八、Java 8 在 java.time 包下提供了很多新的 API。以下为两个比较重要的 API：
+Local(本地) − 简化了日期时间的处理，没有时区的问题。
+Zoned(时区) − 通过制定的时区处理日期时间。
+
+九、内嵌类
+1	static class Base64.Decoder：该类实现一个解码器用于，使用 Base64 编码来解码字节数据。
+2	static class Base64.Encoder：该类实现一个编码器，使用 Base64 编码来编码字节数据。

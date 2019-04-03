@@ -1,0 +1,13 @@
+android:process属性
+重要性层次结构:前台进程>可见进程>服务进程>后台进程>空进程
+应用程序启动时，系统会为它创建一个名为“main”的主线程。
+
+Andoid的单线程模式必须遵守两个规则：
+不要阻塞UI线程。
+不要在UI线程之外访问Andoid的UI组件包。
+
+Activity.runOnUiThread(Runnable)
+View.post(Runnable)
+View.postDelayed(Runnable, long)
+
+要使用异步任务，必须继承AsyncTask类并实现doInBackground()回调方法，实现onPostExecute()方法来分发doInBackground()返回的结果，execute().

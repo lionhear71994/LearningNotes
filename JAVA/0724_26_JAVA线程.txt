@@ -1,0 +1,14 @@
+创建线程的三种方式
+	a) 继承Thread,实现run方法
+	直接调用run方法不会实现多线程，应该调用start方法，因为run和start方法的区别是start会先启动线程，再去调用方法
+	b) 实现Runable，构造Thread时传入Runable子类对象
+	c) 线程池
+线程控制
+	Thread.sleep()
+	Thread.join()  等待该线程终止
+	Thread.yield()  线程礼让：暂停当前线程，执行其他线程
+	setDaemon()   将该线程设置为守护线程，当只有守护线程时，JAVA虚拟机退出；启动线程前调用
+	stop()与interrupt()抛异常
+
+	
+	

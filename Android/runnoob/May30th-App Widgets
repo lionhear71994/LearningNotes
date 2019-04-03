@@ -1,0 +1,24 @@
+AppWidgetProviderInfo object
+AppWidgetProvider class implementation
+
+Androidmanifest
+    <receiver android:name="ExampleAppWidgetProvider" >
+        <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+        </intent-filter>
+        <meta-data android:name="android.appwidget.provider"
+                   android:resource="@xml/example_appwidget_info" />
+    </receiver>
+
+    res/xml
+    <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+        android:minWidth="294dp"
+        android:minHeight="72dp"
+        android:updatePeriodMillis="86400000"
+        android:previewImage="@drawable/preview"
+        android:initialLayout="@layout/example_appwidget"
+        android:configure="com.example.android.ExampleAppWidgetConfigure" 
+        android:resizeMode="horizontal|vertical">
+    </appwidget-provider>
+
+ AppWidgetProvider by calling the onUpdate() 

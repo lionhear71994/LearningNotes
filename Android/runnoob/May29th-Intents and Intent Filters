@@ -1,0 +1,14 @@
+一、 组件名
+    setComponent()、setClass()、setClassName()设置，通过函数读取getComponent() 
+    
+二 、动作
+     setAction()函数设置，通过getAction()函数读取
+      
+三 、数据
+    setData() 函数指定数据作为一个URI， setType()指定它为一个MIME类型，setDataAndType()指定它是URI也是MIME类型。 getData()函数读取URI， getType()读取类型。 
+    
+四 、类型
+    addCategory() 放置一个intent里的类别，removeCategory()删除之前添加的，getCategories()获取当前所有的类别。
+ 
+五 、过滤器
+    Android系统在启动组件前必须知道组件的能力，intent过滤器是在manifest文件（(AndroidManifest.xml）里作为<intent-filter> 元素建立而不是在java代码里。（有一个特例是：广播接收器的过滤器，它是通过Context.registerReceiver()函数动态的注册；它被作为IntentFilter对象创建。）

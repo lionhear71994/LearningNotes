@@ -1,0 +1,68 @@
+变换的原理：lift()
+
+compose: 对 Observable 整体的变换，用于假设在程序中有多个 Observable ，并且他们都需要应用一组相同的 lift() 变换。
+public class LiftAllTransformer implements Observable.Transformer<Integer, String> {
+    @Override
+    public Observable<String> call(Observable<Integer> observable) {
+        return observable
+            .lift1()
+            .lift2()
+            .lift3()
+            .lift4();
+    }
+}
+...
+Transformer liftAll = new LiftAllTransformer();
+observable1.compose(liftAll).subscribe(subscriber1);
+observable2.compose(liftAll).subscribe(subscriber2);
+observable3.compose(liftAll).subscribe(subscriber3);
+observable4.compose(liftAll).subscribe(subscriber4);
+
+线程控制：
+	Observable.just(1, 2, 3, 4) // IO 线程，由 subscribeOn() 指定
+    .subscribeOn(Schedulers.io())
+    .observeOn(Schedulers.newThread())
+    .map(mapOperator) // 新线程，由 observeOn() 指定
+    .observeOn(Schedulers.io())
+    .map(mapOperator2) // IO 线程，由 observeOn() 指定
+    .observeOn(AndroidSchedulers.mainThread) 
+    .subscribe(subscriber);  // Android 主线程，由 observeOn() 指定
+	
+	通过 observeOn() 的多次调用，程序实现了线程的多次切换。
+	不过，不同于 observeOn() ， subscribeOn() 的位置放在哪里都可以，但它是只能调用一次的。
+	
+Observable.doOnSubscribe()和 Subscriber.onStart() 同样是在 subscribe() 调用后而且在事件发送前执行，但区别在于它可以指定线程。默认情况下， doOnSubscribe() 执行在 subscribe() 发生的线程；而如果在 doOnSubscribe() 之后有 subscribeOn() 的话，它将执行在离它最近的 subscribeOn() 所指定的线程。
+
+1. RxJAVA 与 Retrofit 的结合
+
+@GET("/token")
+public Observable<String> getToken();
+
+@GET("/user")
+public Observable<User> getUser(@Query("token") String token, @Query("userId") String userId);
+
+...
+
+getToken()
+    .flatMap(new Func1<String, Observable<User>>() {
+        @Override
+        public Observable<User> onNext(String token) {
+            return getUser(token, userId);
+        })
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribe(new Observer<User>() {
+        @Override
+        public void onNext(User user) {
+            userView.setUser(user);
+        }
+
+        @Override
+        public void onCompleted() {
+        }
+
+        @Override
+        public void onError(Throwable error) {
+            // Error handling
+            ...
+        }
+    });

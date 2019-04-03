@@ -1,0 +1,115 @@
+一、Activity:
+	进程的优先级：前台>可见>服务>后台>空。
+	AndroidManifest中设置四种启动模式
+	
+二、WebView:
+	1、WebView的销毁和内存泄漏问题。
+	mWebContainer.removeAllViews();
+	if(mWebView != null) {
+        mWebView.clearHistory();
+        mWebView.clearCache(true);
+        mWebView.loadUrl("about:blank"); // clearView() should be changed to loadUrl("about:blank"), since clearView() is deprecated now
+        mWebView.freeMemory(); 
+        mWebView.pauseTimers();
+        mWebView = null; // Note that mWebView.destroy() and mWebView = null do the exact same thing
+    }
+	2、WebSettings类：
+	WebSettings webSettings = webView.getSettings();
+	//如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
+	webSettings.setJavaScriptEnabled(true);  
+	//优先使用缓存: 
+	WebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+	3、WebViewClient类	
+	复写shouldOverrideUrlLoading()方法，使得打开网页时不调用系统浏览器， 而是在本WebView中显示
+    webView.setWebViewClient(new WebViewClient(){
+      @Override
+      public boolean shouldOverrideUrlLoading(WebView view, String url) {
+          view.loadUrl(url);
+      return true;
+      }
+	});
+	onPageStarted()作用：开始载入页面调用的，我们可以设定一个loading的页面，告诉用户程序在等待网络响应。
+	onPageFinished()作用：在页面加载结束时调用。我们可以关闭loading 条，切换程序动作。
+	onReceivedError()作用：加载页面的服务器出现错误时（如404）调用。 
+	4、与JS交互
+	if (version < 18) {
+		mWebView.loadUrl("javascript:callJS()");
+	} else {
+		mWebView.evaluateJavascript（"javascript:callJS()", new ValueCallback<String>() {
+			@Override
+			public void onReceiveValue(String value) {
+            //此处为 js 返回的结果
+			}
+	});
+	}
+
+三、ListView：
+	ArrayAdapter：支持泛型操作，最简单的一个Adapter，只能展现一行文字
+	SimpleAdapter：同样具有良好扩展性的一个Adapter，可以自定义多种效果
+	BaseAdapter：抽象类，实际开发中我们会继承这个类并且重写相关方法，用得最多的一个Adapter
+	继承BaseAdapter之后，需要重写以下四个方法：getCount，getItem，getItemId，getView，getCount方法获取Item的个数，每绘制一个Item就会调用一次getView方法。
+	ListView优化
+	复用convertView、ViewHolder机制
+	ViewHolder holder;
+	if (convertView == null) {
+	convertView = mInflater.inflate(R.layout.list_item_icon_text,parent,false);
+	holder = new ViewHolder();
+	convertView.setTag(holder);
+	} else {
+		holder = (ViewHolder) convertView.getTag();
+	}
+	return convertView;
+	
+四、RecyleView:
+	上拉加载，下拉刷新
+	RecyclerView不像ListView一样提供item的点击监听
+	
+五、动画
+	补间动画优缺点
+	缺点：当平移动画执行完停在最后的位置，结果焦点还在原来的位置(控件的属性没有真的被改变) 
+	优点：相对于逐帧动画来说，补间动画更为连贯自然
+	帧动画优缺点
+	缺点：效果单一，逐帧播放需要很多图片，占用空间较大 
+	优点：制作简单
+	属性动画优缺点
+	缺点：(3.0+API出现)向下兼容问题。 
+	优点：易定制，效果强。
+	
+六、自定义View
+	a.对原View进行扩展方式
+	b.多个View的组合方式
+	c.重写View的方式
+	onMesure(测量)，onLayout（布局）,onDraw（绘制）
+	
+七、Service
+	startService(intent)启动 -> 生命周期：onCreate() - onStartCommand() - onStopService() - onDestroy()
+	onbind()启动 -> 生命周期：onCreate() - onBind() - onUnBind() - onDestroy()
+	
+八、Broadcast
+	标准广播：context.sendBroadcast(Intent)方法发送的广播，不可被拦截
+	有序广播：context.sendOrderBroadcast(Intent)方法发送的广播，可被拦截
+	本地广播：localBroadcastManager.sendBroadcast(Intent)，只在app内传播
+	静态注册
+	<receiver 
+		android:name=".BootCompleteReceiver" >
+		<intent-filter>
+		<action android:name="android.intent.action.BOOT_COMPLETED" />
+		</intent-filter>
+	</receiver>
+	动态注册
+	
+九、Fragment
+	
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

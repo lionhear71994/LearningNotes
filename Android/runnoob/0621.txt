@@ -1,0 +1,167 @@
+Socket服务端
+public class SocketServer {
+    public static void main(String[] args) throws IOException {
+        //1.创建一个服务器端Socket，即ServerSocket，指定绑定的端口，并监听此端口
+        ServerSocket serverSocket = new ServerSocket(12345);
+        InetAddress address = InetAddress.getLocalHost();
+        String ip = address.getHostAddress();
+        Socket socket = null;
+        //2.调用accept()等待客户端连接
+        System.out.println("~~~服务端已就绪，等待客户端接入~，服务端ip地址: " + ip);
+        socket = serverSocket.accept();
+        //3.连接后获取输入流，读取客户端信息
+        InputStream is=null;
+        InputStreamReader isr=null;
+        BufferedReader br=null;
+        OutputStream os=null;
+        PrintWriter pw=null;
+        is = socket.getInputStream();     //获取输入流
+        isr = new InputStreamReader(is,"UTF-8");
+        br = new BufferedReader(isr);
+        String info = null;
+        while((info=br.readLine())!=null){//循环读取客户端的信息
+            System.out.println("客户端发送过来的信息" + info);
+        }
+        socket.shutdownInput();//关闭输入流
+        socket.close();
+    }
+}
+
+Socket客户端
+	private void acceptServer() throws IOException {
+        //1.创建客户端Socket，指定服务器地址和端口
+        Socket socket = new Socket("172.16.2.54", 12345);
+        //2.获取输出流，向服务器端发送信息
+        OutputStream os = socket.getOutputStream();//字节输出流
+        PrintWriter pw = new PrintWriter(os);//将输出流包装为打印流
+        //获取客户端的IP地址
+        InetAddress address = InetAddress.getLocalHost();
+        String ip = address.getHostAddress();
+        pw.write("客户端：~" + ip + "~ 接入服务器！！");
+        pw.flush();
+        socket.shutdownOutput();//关闭输出流
+        socket.close();
+		}
+	}
+	因为Android不允许在主线程(UI线程)中做网络操作，所以这里需要我们自己 另开一个线程来连接Socket！
+
+基于UDP协议的Socket通信
+服务端
+public class UPDServer {
+	public static void main(String[] args) throws IOException {
+        /*
+         * 接收客户端发送的数据
+         */
+        // 1.创建服务器端DatagramSocket，指定端口
+        DatagramSocket socket = new DatagramSocket(12345);
+        // 2.创建数据报，用于接收客户端发送的数据
+        byte[] data = new byte[1024];// 创建字节数组，指定接收的数据包的大小
+        DatagramPacket packet = new DatagramPacket(data, data.length);
+        // 3.接收客户端发送的数据
+        System.out.println("****服务器端已经启动，等待客户端发送数据");
+        socket.receive(packet);// 此方法在接收到数据报之前会一直阻塞
+        // 4.读取数据
+        String info = new String(data, 0, packet.getLength());
+        System.out.println("我是服务器，客户端说：" + info);
+
+        /*
+         * 向客户端响应数据
+         */
+        // 1.定义客户端的地址、端口号、数据
+        InetAddress address = packet.getAddress();
+        int port = packet.getPort();
+        byte[] data2 = "欢迎您!".getBytes();
+        // 2.创建数据报，包含响应的数据信息
+        DatagramPacket packet2 = new DatagramPacket(data2, data2.length, address, port);
+        // 3.响应客户端
+        socket.send(packet2);
+        // 4.关闭资源
+        socket.close();
+    }
+}
+客户端
+public class UDPClient {
+    public static void main(String[] args) throws IOException {
+        /*
+         * 向服务器端发送数据
+         */
+        // 1.定义服务器的地址、端口号、数据
+        InetAddress address = InetAddress.getByName("localhost");
+        int port = 8800;
+        byte[] data = "用户名：admin;密码：123".getBytes();
+        // 2.创建数据报，包含发送的数据信息
+        DatagramPacket packet = new DatagramPacket(data, data.length, address, port);
+        // 3.创建DatagramSocket对象
+        DatagramSocket socket = new DatagramSocket();
+        // 4.向服务器端发送数据报
+        socket.send(packet);
+
+        /*
+         * 接收服务器端响应的数据
+         */
+        // 1.创建数据报，用于接收服务器端响应的数据
+        byte[] data2 = new byte[1024];
+        DatagramPacket packet2 = new DatagramPacket(data2, data2.length);
+        // 2.接收服务器响应的数据
+        socket.receive(packet2);
+        // 3.读取数据
+        String reply = new String(data2, 0, packet2.getLength());
+        System.out.println("我是客户端，服务器说：" + reply);
+        // 4.关闭资源
+        socket.close();
+    }
+}
+	
+Android中的13种Drawable
+	Drawable分为两种： 一种是我们普通的图片资源；另一种是我们编写的XML形式的Drawable资源	
+一、ColorDrawable
+	1 建立一个color.xml文件
+	<?xml version="1.0" encoding="utf-8"?>  
+	<resources>  
+		<color name="material_grey_100">#fff5f5f5</color>
+		<color name="material_grey_300">#ffe0e0e0</color>
+		<color name="material_grey_50">#fffafafa</color>
+		<color name="material_grey_600">#ff757575</color>
+		<color name="material_grey_800">#ff424242</color>
+		<color name="material_grey_850">#ff303030</color>
+		<color name="material_grey_900">#ff212121</color>
+	</resources>	
+	2 系统定义好的color:btn.setBackgroundColor(Color.BLUE); 
+	3 利用静态方法argb来设置颜色：txtShow.setBackgroundColor(Color.argb(0xff, 0x00, 0x00, 0x00));
+二、NiewPatchDrawable
+	1.点9图不能放在mipmap目录下，而需要放在drawable目录下！
+	2.AS中的.9图，必须要有黑线，不然编译都不会通过	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

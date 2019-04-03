@@ -1,0 +1,19 @@
+1 高内聚低耦合
+2 ARP
+3 外键
+4 ABDEFG
+5 C
+6 
+7 
+8
+9 
+10 
+
+二 
+1 C.java.lang
+2 D.test ok and gbc
+3 E,A,C,F,
+4 A
+5 A D
+6 
+7 

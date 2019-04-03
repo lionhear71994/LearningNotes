@@ -1,0 +1,23 @@
+	I can not just read,I should write down,especially the sample code.
+Activity
+	1 横竖屏切换与状态保存的问题：
+	 	android:screenOrientation=""；onCreate(Bundle savedInstanceState);onSaveInstanceState(Bundle outState);onRestoreInstanceState(Bundle savedInstanceState);
+		
+Fragment
+	2 创建一个Fragment
+	静态加载
+		定义Fragment的布局；自定义一个Fragment类，重写onCreateView()方法 在该方法中调用:inflater.inflate()方法加载Fragment的布局文件,接着返回加载的view对象；在需要加载Fragment的Activity对应的布局文件中添加fragment的标签
+	动态加载
+		 Fragment1 f1 = new Fragment1();
+         getFragmentManager().beginTransaction().replace(R.id.LinearLayout1, f1).commit();
+	3 Fragment管理与Fragment事务
+	管理
+		findFragmentById() popBackStack() addToBackStack() ...
+	事务
+		FragmentTransaction对象，添加Fragment操作，再提交commit();	
+	Fragment与Activity的交互
+		Fragment获得Activity中的组件: getActivity().findViewById(R.id.list)；
+		Activity获得Fragment中的组件(根据id和tag都可以)：getFragmentManager.findFragmentByid(R.id.fragment1);
+		在Activity中创建Bundle数据包,调用Fragment实例的setArguments(bundle),然后Fragment中调用getArguments获得 Bundle对象
+		在Fragment中定义一个内部回调接口,再让包含该Fragment的Activity实现该回调接口, Fragment就可以通过回调接口传数据
+	

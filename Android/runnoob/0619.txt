@@ -1,0 +1,26 @@
+1 文件读写的实现
+    //这里我们使用私有模式,创建出来的文件只能被本应用访问,还会覆盖原文件哦
+    FileOutputStream output = mContext.openFileOutput(filename, Context.MODE_PRIVATE);
+    output.write(filecontent.getBytes());  //将String字符串以字节流的形式写入到输出流中
+    output.close();         //关闭输出流  
+2 读取SD卡上的文件
+    if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+     filename = Environment.getExternalStorageDirectory().getCanonicalPath() + "/" + filename;
+     //这里就不要用openFileOutput了,那个是往手机内存中写数据的
+     FileOutputStream output = new FileOutputStream(filename);
+     output.write(filecontent.getBytes());
+     //将String字符串以字节流的形式写入到输出流中
+     output.close();
+     //关闭输出流
+	<!-- 在SDCard中创建与删除文件权限 -->
+	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+	<!-- 往SDCard写入数据权限 -->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+3 读取raw和assets文件
+	InputStream is =getResources().openRawResource(R.raw.filename);  
+	
+	AssetManager am =  getAssets();  
+	InputStream is = am.open("filename");
+	
+
+	 

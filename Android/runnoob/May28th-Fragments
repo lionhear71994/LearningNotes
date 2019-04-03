@@ -1,0 +1,73 @@
+Fragment
+一、生命周期 ：
+    onCreate()
+    onCreateView():为了给fragment提供一个布局，你必须实现onCreateView()回调函数,实现这个函数时需要返回fragment所属的根View。
+	onPause()
+	大部分应用程序都应该至少为每个fragment实现这三个方法
+
+	除了基类fragment，这里还有几个你可能会继承的子类：
+		a) DialogFragment显示一个浮动的对话框。使用这个类创建对话框是使用Activity类对话框帮助方法之外的另一个不错的选择，因为你可以把fragment对话	 框并入到由activity管理的fragments后台栈中，允许用户返回到一个已经摒弃的fragment。
+		b) ListFragment显示一个由适配器管理的条目列表（例如SimpleCursorAdapter），类似于ListActivity。提供了许多管理列表视图的函数。
+		c) PreferenceFragment显示一个Preference对象的体系结构列表，类似于preferenceActivity。
+ 
+二、添加用户界面：
+	自定义Fragment是ListFragment的子类时，默认实现从onCreateView()返回一个ListView，所以你不需要实现它。
+    
+    public static class ExampleFragment extends Fragment {
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+	    // Inflate the layout for this fragment
+	    return inflater.inflate(R.layout.example_fragment, container, false);
+	}
+    }
+	传入onCreateView()的参数container是你的frament布局将要被插入的父ViewGroup。如果fragment处于resumed状态，参数savedInstanceState是属于Bundle类，它提供了fragment之前实例的相关数据。
+
+	inflate()函数需要以下三个参数：
+	要inflate的布局的资源ID。
+	被inflate的布局的父ViewGroup。传入container很重要，这是为了让系统将布局参数应用到被inflate的布局的根view中去，由其将要嵌入的父view指定。
+	一个布尔值，表明在inflate期间被infalte的布局是否应该附上ViewGroup（第二个参数）。（在这个例子中传入的是false，因为系统已经将被inflate的布局插入	 到容器中（container）——传入true会在最终的布局里创建一个多余的ViewGroup。）
+ 
+三、将fragment添加到activity之中
+	a) 在activity的布局文件里声明fragment
+	b) 或者通过编码将fragment添加到已存在的ViewGroup中
+ 
+四 、添加无界面的fragment
+	想要添加没有界面的fragment ，可以使用add(Fragment, String)（为fragment提供一个唯一的字符串“tag”，而不是视图（view）ID）。无需实现onCreateView()方法。想从activity中取到fragment，需要使用findFragmentByTag()。
+ 
+五 、管理Fragments
+	使用FragmentManager。可以通过在activity中调用getFragmentManager()获得。可以做如下事情，包括：
+	使用findFragmentById()（用于在activity布局中提供有界面的fragment）或者findFragmentByTag()获取activity中存在的fragment。
+	使用popBackStack()（模仿用户的BACK命令）从后台栈弹出fragment。
+	使用addOnBackStackChangedListener()注册一个监听后台栈变化的监听器。
+ 
+六 、处理Fragment事务
+	在activity中使用fragment的一大特点是具有添加、删除、替换，和执行其它动作的能力，以响应用户的互动。
+	你可以从FragmentManager中获取FragmentTransaction实例：
+	FragmentManager fragmentManager = getFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+	
+	add()/remove()/replace() -> addToBackStatck() ->commit()
+ 
+七 、与Activity交互
+	getActivity()
+	findFragmentById()或者findFragmentByTag()
+ 
+八 、创建activity事件回调函数
+	接口OnArticleSelectedListener
+	onArticleSelected()
+ 
+九 、添加items到Action Bar
+	实现onCreateOptionsMenu()
+	setHasOptionsMenu()
+ 
+十 、处理Fragment生命周期
+	在回调执行fragment的onSaveInstanceState()期间可以保存状态，在onCreate()，onCreateView()，或者onActvityCreate()中可以恢复状态。
+	addToBackStack()
+	
+十一、 与activity生命周期的协调合作
+	onAttach():当fragment被绑定到activity时调用（Activity会被传入）。
+	onCreateView():创建与fragment相关的视图体系时被调用。
+	onActivityCreated():当activity的onCreate()函数返回时被调用。
+	onDestroyView():当与fragment关联的视图体系正被移除时被调用。
+	onDetach():当fragment正与activity解除关联时被调用。
+ 

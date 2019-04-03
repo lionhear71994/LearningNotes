@@ -1,0 +1,24 @@
+May 22th,
+1、Linear Layout
+a)weight属性，权重
+2、Relative Layout：http://www.runoob.com/w3cnote/android-tutorial-relativelayout.html
+
+
+
+
+
+控件
+1、TextView: http://www.runoob.com/w3cnote/android-tutorial-textview.html
+	a) 设置图片的核心其实就是:drawableXxx;可以设置四个方向的图片:drawableTop(上),drawableButtom(下),drawableLeft(左),drawableRight(右) 另外,你也可以使用drawablePadding来设置图片与文字间的间距    相对布局
+	b) android:autoLink还要为这个TextView设置： setMovementMethod(LinkMovementMethod.getInstance()); 不然点击了是没效果的。
+	c) TextView for HTML:
+		 String s1 = "<font color='blue'><b>百度一下，你就知道~：</b></font><br>";
+         s1 += "<a href = 'http://www.baidu.com'>百度</a>";
+         t1.setText(Html.fromHtml(s1));
+         t1.setMovementMethod(LinkMovementMethod.getInstance());
+	d) SpannableString&SpannableStringBuilder定制文本
+2、EditText：http://www.runoob.com/w3cnote/android-tutorial-edittext.html
+	a) 获得焦点后全选组件内所有文本内容:android:selectAllOnFocus="true"
+	b) 限制EditText输入类型:android:inputType="phone"
+	c) 设置最小行，最多行，单行，多行，自动换行:设置最小行的行数：android:minLines="3";android:singleLine="true";
+3、Button：http://www.runoob.com/w3cnote/android-tutorial-button-imagebutton.html

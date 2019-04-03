@@ -1,0 +1,120 @@
+JavaScript 输出
+JavaScript 没有任何打印或者输出的函数。
+	使用 window.alert() 弹出警告框。
+	使用 document.write() 方法将内容写到 HTML 文档中。
+	使用 innerHTML 写入到 HTML 元素。
+	使用 console.log() 写入到浏览器的控制台。
+	
+数组[]  对象{}
+
+var x,y,z=1;  //x,y 为 undefined， z 为 1。
+
+值类型(基本类型)：字符串（String）、数字(Number)、布尔(Boolean)、对空（Null）、未定义（Undefined）、Symbol。
+引用数据类型：对象(Object)、数组(Array)、函数(Function)。
+
+methodname : function(){	code	}
+
+如果您把值赋给尚未声明的变量，该变量将被自动作为 window 的一个属性。
+age = 18;
+console.log(window.age); //18
+
+onchange	HTML 元素改变
+onclick		用户点击 HTML 元素
+onmouseover	用户在一个HTML元素上移动鼠标
+onmouseout	用户从一个HTML元素上移开鼠标
+onkeydown	用户按下键盘按键
+onload		浏览器已完成页面的加载
+
+字符串可以是对象
+
+===	绝对等于（值和类型均相等）		!==	 不绝对等于（值和类型有一个不相等，或两个都不相等）
+
+for (var i=0;i<cars.length;i++){ 
+    document.write(cars[i] + "<br>");
+}
+-----------------------------------------
+var person={fname:"John",lname:"Doe",age:25};  
+for (x in person)  // x 为属性名{
+    txt=txt + person[x];
+}
+
+
+标签:breake labelname,可以使用break和continue在多层循环的时候控制外层循环。
+
+在JavaScript中，数组是一种特殊的对象类型。 因此 typeof [1,2,3,4] 返回 object。 
+------------------------------------------------------
+JavaScript 数据类型:
+在 JavaScript 中有 5 种不同的数据类型：
+string
+number
+boolean
+object
+function
+3 种对象类型：
+Object
+Date
+Array
+2 个不包含任何值的数据类型：
+null
+undefined
+	null 和 undefined 的值相等，但类型不等
+---------------------------------------------------
+JavaScript 中，函数及变量的声明都将被提升到函数的最顶部。
+JavaScript 中，变量可以在使用后声明，也就是变量可以先使用再声明。
+声明：var x;
+初始化：var x = 1;
+
+严格模式的限制
+不允许使用未声明的变量、不允许删除变量或对象、不允许删除函数……
+
+switch 语句会使用恒等计算符(===)进行比较
+
+E-MAIL验证
+function validateForm(){
+  var x=document.forms["myForm"]["email"].value;
+  var atpos=x.indexOf("@");
+  var dotpos=x.lastIndexOf(".");
+  if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length){
+    alert("不是一个有效的 e-mail 地址");
+    return false;
+  }
+}
+
+javascript:void(0)
+
+JavaScript 函数有个内置的对象 arguments 对象，它包含了函数调用的参数数组
+
+闭包
+var add = (function () {
+    var counter = 0;
+    return function () {return counter += 1;}
+})();
+add();
+add();
+add();
+
+document.write() 可用于直接向 HTML 输出流写内容，绝对不要在文档(DOM)加载完成之后使用 document.write()。这会覆盖该文档。
+修改 HTML 内容的最简单的方法是使用 innerHTML 属性。
+改变 HTML 元素的属性 document.getElementById(id).attribute=新属性值
+改变 HTML 元素的样式 document.getElementById(id).style.property=新样式
+
+document.getElementById("myBtn").onclick=function(){displayDate()};
+
+document.getElementById("myBtn").addEventListener("click", displayDate);
+
+事件传递有两种方式：冒泡与捕获。
+事件传递定义了元素事件触发的顺序。 如果你将 <p> 元素插入到 <div> 元素中，用户点击 <p> 元素, 哪个元素的 "click" 事件先被触发呢？
+在 冒泡 中，内部元素的事件会先被触发，然后再触发外部元素，即： <p> 元素的点击事件先触发，然后会触发 <div> 元素的点击事件。
+在 捕获 中，外部元素的事件会先被触发，然后才会触发内部元素的事件，即： <div> 元素的点击事件先触发 ，然后再触发 <p> 元素的点击事件。
+addEventListener() 方法可以指定 "useCapture" 参数来设置传递类型：
+addEventListener(event, function, useCapture);
+默认值为 false, 即冒泡传递，当值为 true 时, 事件使用捕获传递。
+
+
+
+
+
+
+
+
+

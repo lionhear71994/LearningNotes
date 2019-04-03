@@ -1,0 +1,30 @@
+May 23th,
+
+一、Activity加载模式：standard singleTop singleTask singleInstance 
+
+
+May 245h,
+
+一、Service：
+	a） Android中使用Service的方式有两种：
+		1）StartService()启动Service
+		2）BindService()启动Service
+		PS:还有一种，就是启动Service后，绑定Service！
+	b) 启动Service相关方法详解：
+		onCreate()：当Service第一次被创建后立即回调该方法，该方法在整个生命周期 中只会调用一次！
+		onDestory()：当Service被关闭时会回调该方法，该方法只会回调一次！
+		onStartCommand(intent,flag,startId)：当客户端调用startService(Intent)方法时会回调，可多次调用StartService方法， 但不会再创建		新的Service对象，而是继续复用前面产生的Service对象，但会继续回调 onStartCommand()方法！
+		IBinder onOnbind(intent)：该方法是Service都必须实现的方法，该方法会返回一个 IBinder对象，app通过该对象与Service组件进行通信！
+		onUnbind(intent)：当该Service上绑定的所有客户端都断开时会回调该方法！
+	c) BindService启动Service:
+		1)当首次使用bindService绑定一个Service时,系统会实例化一个Service实例,并调用其onCreate()和onBind()方法,然后调用者就可以通过			IBinder和Service进行交互了,此后如果再次使用bindService绑定Service,系统不会创建新的Sevice实例,也不会再调用onBind()方法,只会直接		把IBinder对象传递给其他后来增加的客户端!
+		2)如果我们解除与服务的绑定,只需调用unbindService(),此时onUnbind和onDestory方法将会被调用!多个客户端绑定同一个Service的话,情况如		      下 当一个客户完成和service之间的互动后，它调用 unbindService() 方法来解除绑定。当所有的客户端都和service解除绑定后，系统会销毁		     service。		（除非service也被startService()方法开启）
+		3)另外,和上面那种情况不同,bindService模式下的Service是与调用者相互关联的,可以理解为 "一条绳子上的蚂蚱",一旦调用者销毁,那么	                 Service也立即终止!
+		通过BindService调用Service时调用的Context的bindService的解析 bindService(Intent Service,ServiceConnection conn,int flags)
+		service:通过该intent指定要启动的Service
+		conn:ServiceConnection对象,用户监听访问者与Service间的连接情况, 连接成功回调该对象中的	                                  		  onServiceConnected(ComponentName,IBinder)方法; 如果Service所在的宿主由于异常终止或者其他原因终止,导致Service与访问者间断开 连                 接时调用onServiceDisconnected(CompanentName)方法,主动通过unBindService() 方法断开并不会调用上述方法!
+		flags:指定绑定时是否自动创建Service(如果Service还未创建), 参数可以是0(不自动创建),BIND_AUTO_CREATE(自动创建)
+		
+		StartService启动Service后bindService绑定:假如我们使用bindService来绑定一个已经启动的Service，系统只是将Service的内部IBinder对                 象传递给Activity,并不会将Service的生命周期 与Activity绑定,因此调用unBindService( )方法取消绑定时,Service也不会被销毁！
+		
+		使用BindService绑定Service,依次调用onCreate(),onBind()方法, 我们可以在onBind()方法中返回自定义的IBinder对象;再接着调用的是                     ServiceConnection的onServiceConnected()方法该方法中可以获得 IBinder对象,从而进行相关操作;当Service解除绑定后会自动调用                         onUnbind和onDestroyed方法,当然绑定多客户端情况需要解除所有 的绑定才会调用onDestoryed方法进行销毁哦！

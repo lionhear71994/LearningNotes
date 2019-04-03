@@ -1,0 +1,18 @@
+ThreadGroup(String name)
+
+Executors工厂类来产生线程池:
+public static ExecutorsService newCachedThreadPool()
+public static ExecutorsService newFixedThreadPool(int nThreads)
+public static ExecutorsService newSingleThreadExecutor()
+执行线程池中的线程
+ExecutorsService pool.submit(new Runable);
+pool.shutdown();
+
+第三种创建线程方法：实现Callable，但是Callable依赖于线程池，因为ExecutorsService类的submit方法可以接收Callable子类对象
+
+
+
+
+
+
+	

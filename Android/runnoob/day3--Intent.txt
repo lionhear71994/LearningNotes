@@ -1,0 +1,38 @@
+Intent的七个属性：
+	a) ComponentName:在被启动的Activity中嗲用getIntent().getComponent()获取该对象
+	b) Action：普通的字符串，代表Intent要完成的抽象动作
+	c) Category：普通的字符串，用于为Action提供额外的附加类别信息；一个Intent对象只能有一个Action，但是可以有多个Category
+	d) Data,Type Data用于向Action属性提供操作的数据，接受一个URI对象
+	Typ用于指定Data所指定的URI对应的MIME类型
+	e) Extras 用于多个Action之间的数据交换，Extras属性是一个Bundle对象，键值对存储数据
+	f) Flags 表示不同来源的标记
+	
+隐式Intent 主要匹配三个属性：Action Data,TYPE Category 
+	预定义动作与自定义动作
+
+Intent传递数据
+	传递数组
+	bd.putStringArray("StringArray",new String[]{"a","b"});
+	String sta = bd.getStringArray("StringArray");
+	传递集合
+	a) List<基本数据类型>
+	intent.putStringArrayListExtra(name, value)
+	intent.putIntegerArrayListExtra(name, value)
+	b) List<Object>
+	putExtras(key, (Serializable)list)
+	PS:Object类需要实现Serializable接口
+	c) Map<String, Object>,或更复杂的
+	解决方法是：外层套个List
+	
+	传递对象的方式有两种：
+	a)将对象转换为Json字符串
+	b) 通过Serializable,Parcelable序列化 可使用fastjson或者Gson第三方库！
+	
+	
+	
+	
+	
+	
+	
+	
+	
