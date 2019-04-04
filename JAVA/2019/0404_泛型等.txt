@@ -1,0 +1,67 @@
+
+1、泛型是提供给javac编译器使用的，限定集合的输入类型，编译器编译带类型说明的集合时会去掉“类型”信息。
+
+2、"?"是类型实参，而不是类型形参。当具体类型不确定的时候，这个通配符就是"?"
+
+3、泛型类，是在实例化类的时候指明泛型的具体类型；泛型方法，是在调用方法的时候指明泛型的具体类型 。
+
+4、如果静态方法要使用泛型的话，必须将静态方法也定义成泛型方法。
+
+5、泛型的上下边界添加，必须与泛型的声明在一起
+
+6、数组的类型不可以是类型变量，除非是采用通配符的方式。
+
+7、Java自带的线程安全的基本类型包括： AtomicInteger, AtomicLong, AtomicBoolean, AtomicIntegerArray,AtomicLongArray等
+
+8、被transient修饰的变量值不会被持久化和恢复。transient只能修饰变量，不能修饰类和方法。
+
+9、Java 的对象都是引用类型，如果是一个原始数据类型数组，它在内存里是一段连续的内存，而对象数组则不然，数据存储的是引用，对象往往是分散地存储在堆的不同位置。
+
+10、方法栈、堆
+
+11、new Integer 和 Integer.valueof
+
+12、接口的方法默认是 public，所有方法在接口中不能有实现(Java 8 开始接口方法可以有默认实现），抽象类可以有非抽象的方法
+	接口中的实例变量默认是 final 类型的，而抽象类中则不一定
+	一个类实现接口的话要实现接口的所有方法，而抽象类不一定
+	接口不能用 new 实例化，但可以声明，但是必须引用一个实现该接口的对象 从设计层面来说，抽象是对类的抽象，是一种模板设计，接口是行为的抽象，是一种行为的规范。
+
+13、高扩展性代码：
+public class VIPCenter {
+    private Map<User.TYPE, ServiceProvider> providers;
+    void serviceVIP(T extend User user） {
+        providers.get(user.getType()).service(user);
+    }
+}
+
+interface ServiceProvider{
+    void service(T extend User user) ;
+}
+
+class SlumDogVIPServiceProvider implements ServiceProvider{
+    void service(T extend User user){
+        // do somthing
+    }
+}
+
+class RealVIPServiceProvider implements ServiceProvider{
+    void service(T extend User user) {
+        // do something
+    }
+}
+
+14、变量三要素(人物--所属、时间--生命周期、地点--内存位置、事件--调用)。
+
+15、构造代码块：在类中方法外出现；多个构造方法方法中相同的代码存放到一起，每次调用构造都执行，并且在构造方法前执行。
+
+16、在方法的调用过程中，实参把它的实际值传递给形参，此传递过程就是将实参的值复制一份传递到函数中，这样如果在函数中对该值（形参的值）进行了操作将不会影响实参的值。
+
+17、基本数据类型传值，对形参的修改不会影响实参；
+	引用类型传引用，形参和实参指向同一个内存地址（同一个对象），所以对参数的修改会影响到实际的对象。
+	String, Integer, Double等immutable的类型特殊处理，可以理解为传值，最后的操作不会修改实参对象。
+	
+18、1.arraycopy()需要目标数组，将原数组拷贝到你自己定义的数组里，而且可以选择拷贝的起点和长度以及放入新数组中的位置
+	2.copyOf()是系统自动在内部新建一个数组，并返回该数组。
+	
+3.0.0.2
+
