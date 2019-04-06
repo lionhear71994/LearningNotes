@@ -29,4 +29,3 @@
 	
 6、ArrayList 实现了 writeObject() 和 readObject() 来控制只序列化数组中有元素填充那部分内容
 
-3.0.0.7

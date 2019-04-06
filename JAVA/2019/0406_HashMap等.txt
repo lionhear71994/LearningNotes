@@ -1,0 +1,33 @@
+原文出处:	https://juejin.im/post/5c20bbb7e51d4549ef17baac#heading-9
+
+1、读写机制：
+	ArrayList在执行插入元素是超过当前数组预定义的最大值时，数组需要扩容，扩容过程需要调用底层System.arraycopy()方法进行大量的数组复制操作；在删除元素时并不会减少数组的容量（如果需要缩小数组容量，可以调用trimToSize()方法）；在查找元素时要遍历数组，对于非null的元素采取equals的方式寻找。
+	LinkedList在插入元素时，须创建一个新的Entry对象，并更新相应元素的前后元素的引用；在查找元素时，需遍历链表；在删除元素时，要遍历链表，找到要删除的元素，然后从链表上将此元素删除即可。
+	Vector与ArrayList仅在插入元素时容量扩充机制不一致。对于Vector，默认创建一个大小为10的Object数组，并将capacityIncrement设置为0；当插入元素数组大小不够时，如果capacityIncrement大于0，则将Object数组的大小扩大为现有size+capacityIncrement；如果capacityIncrement<=0,则将Object数组的大小扩大为现有大小的2倍。
+
+2、CopyOnWriteArrayList 适合在多线程里使用，适合使用在读操作远远大于写操作的场景里，比如缓存。
+
+3、 HashMap: 基于AbstractMap类，实现了Map、Cloneable（能被克隆）、Serializable（支持序列化）接口； 非线程安全；允许存在一个为null的key和任意个为null的value；采用链表散列的数据结构，即数组和链表的结合；初始容量为16，填充因子默认为0.75，扩容时是当前容量翻倍，即2capacity
+	HashMap采用链表散列的数据结构，即数组和链表的结合，在Java8后又结合了红黑树，当链表元素超过8个将链表转换为红黑树
+	Hashtable：基于Map接口和Dictionary类；线程安全，开销比HashMap大，如果多线程访问一个Map对象，使用Hashtable更好；不允许使用null作为key和value；底层基于哈希表结构；初始容量为11，填充因子默认为0.75，扩容时是容量翻倍+1，即2capacity+1
+	HashTable里使用的是synchronized关键字，这其实是对对象加锁，锁住的都是对象整体，当Hashtable的大小增加到一定的时候，性能会急剧下降，因为迭代时需要被锁定很长的时间。
+
+4、ConcurrentHashMap是线程安全的HashMap，它采取锁分段技术，将数据分成一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问。
+	JDK1.8中对ConcurrentHashmap做了两个改进:
+	a.取消segments字段，将数组元素作为锁，对每一行数据进行加锁，可减少并发冲突的概率
+	b.数据结构由“数组＋单向链表”变为“数组＋单向链表＋红黑树”，当链表长度超过阈值（8）时，将链表转换为红黑树，使得查询的时间复杂度可以降低到O(logN)
+	Hashtable锁住整个Map；性能弱于ConcurrentHashMap。
+
+5、LinkedHashMap是有序的HashMap：基本原理是其内部通过Entry维护了一个双向链表，负责维护Map的迭代顺序。
+
+6、Hash函数定义：把任意长度的输入（又叫做预映射pre-image）通过散列算法变换成固定长度的输出，该输出就是散列值，是一种压缩映射。
+	h(k1)≠h(k2)则k1≠k2，即散列值不相同，则输入值即预映射不同
+	如果k1≠k2，h(k1)=h(k2) 则发生碰撞；
+	如果h(k1)=h(k2)，k1不一定等于k------hash值相等，不等于输入值相等。
+
+7、HashMap是使用了哪些方法来有效解决哈希冲突的
+	1.使用链地址法（使用散列表）来链接拥有相同hash值的数据；
+	2.使用2次扰动函数（hash函数）来降低哈希冲突的概率，使得数据分布更平均；
+	3.引入红黑树进一步降低遍历的时间复杂度，使得遍历更快；
+	
+8、HashMap扩容：当链表数组的容量超过初始容量*加载因子（默认0.75）时，再散列将链表数组扩大2倍
