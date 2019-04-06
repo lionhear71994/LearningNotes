@@ -1,0 +1,32 @@
+1、SparseArray	
+	1.key  和 value  采用数组进行存储。存储 key 的数组是 int 类型，不需要进行装箱操作。提供了速度。
+	2.采用二分查找法，在插入进行了排序，所以两个数组是按照从小到大进行排序的。
+	3.在查找的时候，进行二分查找，数据量少的情况下，速度比较快。	
+	
+2、Arrays.sort()经过调优的快速排序；Collections.sort()经过修改的合并排序算法。
+
+3、快速失败机制 “fail-fast”：当多个线程对集合进行结构上的改变的操作时，这个时候程序就会抛出 ConcurrentModificationException 异常，从而产生fail-fast机制。
+	解决办法：
+	1.在遍历过程中，所有涉及到改变modCount值得地方全部加上synchronized。
+	2.使用CopyOnWriteArrayList来替换ArrayList
+
+4、 a.ArrayList的底层结构是数组，可用索引实现快速查找；是动态数组，相比于数组容量可实现动态增长。ArrayList非线程安全，建议在单线程中才使用ArrayList，而在多线程中可以选择Vector或者CopyOnWriteArrayList；默认初始容量为10，每次扩容为原来的1.5倍
+	b.Vector和ArrayList几乎是一样的，Vector使用了synchronized关键字，是线程安全的，比ArrayList开销更大，访问更慢；默认初始容量为10，默认每次扩容为原来的2倍，可通过capacityIncrement属性设置
+	c.LinkedList底层结构是链表，增删速度快；是一个双向循环链表，也可以被当作堆栈、队列或双端队列
+
+5、ArrayList扩容：
+		private void grow(int minCapacity) {
+        // overflow-conscious code
+        int oldCapacity = elementData.length;
+        int newCapacity = oldCapacity + (oldCapacity >> 1);
+        if (newCapacity - minCapacity < 0)
+            newCapacity = minCapacity;
+        if (newCapacity - MAX_ARRAY_SIZE > 0)
+            newCapacity = hugeCapacity(minCapacity);
+        // minCapacity is usually close to size, so this is a win:
+        elementData = Arrays.copyOf(elementData, newCapacity);
+    }
+	
+6、ArrayList 实现了 writeObject() 和 readObject() 来控制只序列化数组中有元素填充那部分内容
+
+3.0.0.7

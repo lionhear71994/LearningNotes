@@ -50,7 +50,7 @@ class RealVIPServiceProvider implements ServiceProvider{
     }
 }
 
-14、变量三要素(人物--所属、时间--生命周期、地点--内存位置、事件--调用)。
+14、变量四要素(人物--所属、时间--生命周期、地点--内存位置、事件--调用)。
 
 15、构造代码块：在类中方法外出现；多个构造方法方法中相同的代码存放到一起，每次调用构造都执行，并且在构造方法前执行。
 
@@ -62,6 +62,4 @@ class RealVIPServiceProvider implements ServiceProvider{
 	
 18、1.arraycopy()需要目标数组，将原数组拷贝到你自己定义的数组里，而且可以选择拷贝的起点和长度以及放入新数组中的位置
 	2.copyOf()是系统自动在内部新建一个数组，并返回该数组。
-	
-3.0.0.2
 
