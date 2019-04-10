@@ -1,0 +1,24 @@
+原文：https://juejin.im/post/5c20c27551882504bd0e6f6d
+
+1、当一个线程试图访问同步代码块时，它首先必须得到锁，退出或抛出异常时必须释放锁。synchronized用的锁是存在Java对象头里的MarkWord，通常是32bit或者64bit，其中最后2bit表示锁标志位。
+	synchronized本质上锁住的是对象
+	
+2、CAS有3个操作数，内存值V，旧的预期值A，要修改的新值B。当且仅当预期值A和内存值V相同时，将内存值V修改为B，否则什么都不做。自旋就是不断尝试CAS操作直到成功为止。	    -----Atomic类
+	ABA问题，解决方法：AtomicStampedReference，自带时间戳。
+
+3、CountDownLatch:
+	构造器中的计数值（count）实际上就是闭锁需要等待的线程数量。这个值只能被设置一次，而且CountDownLatch没有提供任何机制去重新设置这个计数值。
+	与CountDownLatch的第一次交互是主线程等待其他线程。主线程必须在启动其他线程后立即调用CountDownLatch.await()方法。这样主线程的操作就会在这个方法上阻塞，直到其他线程完成各自的任务。
+	
+4、Runnable接口和Callable接口的区别：
+		Runnable接口中的run()方法的返回值是void，它做的事情只是纯粹地去执行run()方法中的代码而已；Callable接口中的call()方法是有返回值的，是一个泛型，和Future、FutureTask配合可以用来获取异步执行的结果。
+
+5、提交任务时，线程池队列已满：
+	无界队列LinkedBlockingQueue近乎认为是一个无穷大的队列，可以无限存放任务。
+	有界队列比如ArrayBlockingQueue，任务首先会被添加到ArrayBlockingQueue中，ArrayBlockingQueue满了，会根据maximumPoolSize的值增加线程数量，如果增加了线程数量还是处理不过来，ArrayBlockingQueue继续满，那么则会使用拒绝策略RejectedExecutionHandler处理满了的任务，默认是AbortPolicy。
+	
+6、乐观锁和悲观锁：
+	乐观锁：就像它的名字一样，对于并发间操作产生的线程安全问题持乐观状态，乐观锁认为竞争不总是会发生，因此它不需要持有锁，将比较-替换这两个动作作为一个原子操作尝试去修改内存中的变量，如果失败则表示发生冲突，那么就应该有相应的重试逻辑。
+	悲观锁：还是像它的名字一样，对于并发间操作产生的线程安全问题持悲观状态，悲观锁认为竞争总是会发生，因此每次对某资源进行操作时，都会持有一个独占的锁，就像synchronized，直接上了锁就操作资源。
+
+	
