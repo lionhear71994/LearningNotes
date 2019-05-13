@@ -1,0 +1,49 @@
+https://www.runoob.com/servlet/servlet-intro.html
+《深入浅出Spring boot 2.x》
+
+1、尽量使用Configuration类，相关注解以@Enable开头
+
+2、@Import可以导入多个Configuration类，或者@ComponScan扫描
+
+3、@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+
+4、@SpringBootApplication=@Configuration+@EnableAutoConfiguration+@ComponentScan
+
+5、Servlet生命周期： init();	service();	destory();	最后由垃圾回收器回收
+
+6、Spring把每一个需要管理的对象称为 Spring Bean；管理这些Bean的容器称为Spring IoC，所有IoC容器都需要实现BeanFactory接口。ApplicationContext是BeanFactory的子接口。
+
+7、 @Configuration：	这是一个Java配置文件；
+	@Component： 	某个类扫描进入IoC容器；
+	@ComponentScan： 	采用某种策略去扫描装配Bean：可配置filter等参数；
+	@Value：对象具体的值；
+	@Bean:	将第三方包类装配到容器中；
+	@AutoWired：by type -- by name 
+	@Primary和Quelifier("dog")：	为了是AutoWired消除歧义
+	
+8、Bean的生命周期：	Bean定义、Bean初始化、Bean生存期、Bean销毁;
+	ComponentScan有一个配置项lazyInit默认值为fales，也就是默认不进行延迟初始化
+	
+9、Bean的作用域：	
+	singleton：默认值，单例
+	prototype：每次创建新的Bean
+	seesion：HTTP会话
+	appliction:	Web工程生命周期
+	request:	Web单词请求				globalSession
+	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE/SCOPE_REQUEST)
+	
+10、Spring AOP
+	AOP最为典型的应用就是数据库事务的管控。
+	@Aspect
+	@Transactional
+	正则式：
+	execution(* com.springboot.chapter4 aspect .s ervice mp l.Us erServ ceimpl printUser ( . ) ) 
+	其中：	executio 表示在执行的时候 ，拦截里面的正则匹配的方法：
+			＊表示任意返回类型的方法：
+			com.springboot.chaptr4.aspect.sevice.impl.UserSericelmpl 指定目标对象的全限定名称：
+			printUse 指定目标对象的方法
+			（..）表示任意参数进行匹配。
+	@DeclareParents：	引入新的类来增强服务，2个必须配置属性value和defaultImpl
+	多切面指定执行顺序:@Order和Ordered接口
+
+	
