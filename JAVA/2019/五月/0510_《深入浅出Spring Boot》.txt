@@ -23,14 +23,17 @@ https://www.runoob.com/servlet/servlet-intro.html
 	
 8、Bean的生命周期：	Bean定义、Bean初始化、Bean生存期、Bean销毁;
 	ComponentScan有一个配置项lazyInit默认值为fales，也就是默认不进行延迟初始化
+	条件装配Bean：	@Conditional和实现Condition接口	
 	
-9、Bean的作用域：	
+9、Bean的作用域：
+	@Profile	
 	singleton：默认值，单例
 	prototype：每次创建新的Bean
 	seesion：HTTP会话
 	appliction:	Web工程生命周期
 	request:	Web单词请求				globalSession
 	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE/SCOPE_REQUEST)
+	
 	
 10、Spring AOP
 	AOP最为典型的应用就是数据库事务的管控。
@@ -45,5 +48,12 @@ https://www.runoob.com/servlet/servlet-intro.html
 			（..）表示任意参数进行匹配。
 	@DeclareParents：	引入新的类来增强服务，2个必须配置属性value和defaultImpl
 	多切面指定执行顺序:@Order和Ordered接口
+	
+11、配置文件
+	@Value使用${xxx.xxx}可以读取application.properties文件内容
+	@ConfigurationProperties("xxx")
+	@PropertySource(value={"classpath:xxx.propertites"},ignoreResourceNotFound=true)定义对应的属性文件
+	
+12、
 
 	
