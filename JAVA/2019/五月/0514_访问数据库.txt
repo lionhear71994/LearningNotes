@@ -1,0 +1,34 @@
+1、#指定数据库连接池类型： 	spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
+
+2、MyBatis：	枚举可以通过typeHandler进行转换
+	mybatis.mapper-locations=classpath:com/xxx/*.xml
+	
+	＃定义 Mapper XML 路径
+	mybatis.mapper-locations=  
+	＃定义另 名扫描的包， 需要与日Alias 联合使用
+	mybatis.type-alases-package= ..... . 
+	#MyBatis 配置文件 当你的配置比较复杂的时候，可 以使用
+	mybatis.config-location= 
+	＃配置 MyBaits 插件（拦截器）
+	mybatis.configuration.interceptors= 
+	＃具体类商要与日MappedJdbcTypes 联合使用
+	mybatis.type-handlers-package= . 
+	＃级联延迟加载属性配置
+	mybatis.configuration.aggressive-lazyloading= .. 
+	＃执行器（ Executor 〕，可以配置 SIMPLE REUSE , BATCH ，默认为 SIMPLE
+	mybatis.executortype=
+	
+3、@Transactional
+	isolation隔离级别：
+	a.READ UNCOMMITTED：允许一个事务读取另一个事务没有提交的数据。
+	b.READ COMMITTED：一个事务只能读取另一个事务已经提交的数据。
+	c.可重复读：克服读写提交中的不可重复读现象。
+	d.串行化：要求所有SQL按顺序执行。
+	#tomcat 数据源默认隔离级别
+	spring.datasource.tomcat.default-transaction-isolation=2
+	#dbcp2 数据库连接池默认隔离级别
+	spring.datasource.dbcp2.default-transaction-isolation=2
+	propagation传播行为:
+	
+	
+	
