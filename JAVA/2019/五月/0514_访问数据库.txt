@@ -28,7 +28,15 @@
 	spring.datasource.tomcat.default-transaction-isolation=2
 	#dbcp2 数据库连接池默认隔离级别
 	spring.datasource.dbcp2.default-transaction-isolation=2
-	propagation传播行为:
 	
+	Propagation传播行为:
+	*REQUIRED: 需要事务
+	SUPPORTS: 支持事务
+	MANDATORY：必须使用事务，沿用
+	*REQUIRES_NEW: 无论当前事务是否存在，都会创建新事务运行方法
+	NOT_SUPPORTED: 不支持事务，挂起事务
+	NEVER： 存在事务抛异常
+	*NESTED： 在当前方法调用子方法时，子方法发生异常，只回滚子方法执行过的SQL，不会回滚当前方法的事务
 	
+	事务自调用失效问题：使用一个service去调用另一个service。
 	
