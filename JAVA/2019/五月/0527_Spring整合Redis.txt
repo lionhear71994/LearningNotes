@@ -1,0 +1,26 @@
+
+1、Redis数据类型：	散列数据类型、链表、集合、
+	有序集合(zset)：	使用score排序、提供TypedTuple接口。
+	
+2、Redis事务：
+	watch(监控Rdis的一些键),multi(将事务放到队列里),exec(执行事务，执行前判断watch监控的键的值是否发生过变化，发生了变化Redis就会取消事务)
+	Redis命令出错只会报出错误，不会回滚。
+	
+3、Redis流水线(pipline)
+
+4、Redis发布订阅
+	Redis发送消息命令：	publish channel msg	或者使用RedisTemplate类发送命令
+
+5、Lua脚本：
+	RedisScript接口DefaultRedisScript实现类
+	
+6、缓存注解
+	@CachePut:		表示将方法结果返回存放到缓存中。
+	@Cacheable:		表示先从缓存中定义的键查询，如果可以查询到数据，则返回，否则执行该方法，返回数据并将返回结果保存到缓存中。
+	@CacheEvict:	通过定义的键移除缓存。beforeInvocation表示在该方法之前或之后移除缓存，默认值false。
+	condition、更新数据避免使用缓存、命中率低不用缓存
+	
+
+	
+	
+	
