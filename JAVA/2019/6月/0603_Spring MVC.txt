@@ -1,0 +1,62 @@
+
+1、获取参数：
+	@RequestParam：	默认情况下参数不为空，required属性指定
+	传递数组：	strArr=str1,str2,str3
+	传递json：	public User insert (@RequestBody User user)
+	URL参数：	GetMapping("/{id}")		@PathVariable("id")
+	获取格式化参数：	@DateTimeFormat(iso=ISO.DATE) DATE date	
+						@NumberFormat(pattern = "#,###.##") Double number
+						日期参数也可以不用@DateTimeFormat，可以用:	spring.mvc.date-format=yyyy-MM-dd
+2、自定义转换参数
+	Converter：	一对一转换器	Formatter：	GenericConverter：	数组转换器
+	自定义转换器：	注解用@Component并实现Converter接口
+	自定义验证器：	实现Validator接口、用@InitBinder绑定验证器
+	
+3、数据模型
+	控制器方法参数中使用ModelAndView、Model和ModelMap，Spring MVC会自动创建数据模型对象
+	model.addAttribute("user",user);	modelMap.put("user",user);	modelview.addObject("user",user);
+
+4、视图
+	视图实例——导出PDF文件
+	pom文件加入PDF依赖	定义导出接口	继承AstractPdfView抽象类，调用导出接口方法	控制器导出PDF数据(PDF View等类)
+	
+5、文件上传
+	配置
+	#是否启用Spring MVC多分部上传功能
+	spring.servlet.multipart.enable=true
+	#将文件写入磁盘的阈值。可用后缀"MB""KB"
+	spring.servlet.multipart.file-size-threshould=0
+	#指定默认上传的文件夹
+	spring.servlet.multipart.location=
+	#限制单个文件最大大小
+	spring.servlet.multipart.max-file-size=1MB
+	#限制所有文件最大大小
+	spring.servlet.multipart.max-request-size=200MB
+	#是否延迟多部件文件请求的参数和文件的解析
+	spring.servlet.multipart.resolve-lazily=false
+	根据这些配置，Spring Boot会自动生成StandardServletMutilpartResolver对象
+	<from>表单声明：multipart/form-data
+	控制器开发	使用HttpservletRequest作为参数
+	
+6、拦截器
+	实现HandlerInterceptor接口	注册拦截器：实现WebMvcConfigure接口并重写addInterceptors
+	多个拦截器顺序：责任链模式
+	
+7、拾遗
+	a	@ResponseBody转换为json的秘密：@ResponseBody转换为json的秘密：	ResultResolver解析控制器返回，轮询注册给HttpMessageConverter接口的实现类，MappingJackson2HttpMessageConverter就匹配上了
+	b	获取请求头参数:	@RequestHeader("id") Long id
+
+8、REST
+	@RestController类注解，所有方法使用json视图
+	处理状态码：	HttpHeaders headers = new ...	headers.add("success",success)
+	指定状态码：	@ResponseStatus(HttpStatus.CREATED)
+	异常：	@ControllerAdvice用来定义控制器通知	@ExceptionHandler指定异常发生的处理方法
+	自定义异常类	定义控制器	使用@ControllerAdvice处理异常	@ExceptinoHandler指定为自定义异常	@ResponseStatus指定为错误状态码
+	
+
+	
+	
+
+	
+	
+	
