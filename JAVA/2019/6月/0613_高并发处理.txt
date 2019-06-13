@@ -1,0 +1,5 @@
+1、悲观锁：	FOR UPDATE。	导致阻塞。
+
+2、乐观锁：	CAS(Compare and swap)	导致ABA问题，用version解决 --> 导致大量事务失败	-->	重做事务并加上重做次数限制或者重做时间
+
+

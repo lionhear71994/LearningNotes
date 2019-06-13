@@ -1,0 +1,18 @@
+  
+1、定制SpringMVC初始化
+	接口WebMvcConfigurer，自定义配置类：	WebMvcAutoConfiguration
+	
+2、@RequestMapping(method='get') 	= 	@GetMapping
+
+3、获取参数
+	a	在无任何注解情况下，要求HTTP参数和控制器方法参数名称一致
+	b	@RequestPararm("str_val") String strVal;可配置属性required，默认为true
+	c	传递数组： 	String[] strArr	->	strarr=str1,str2,str3
+	d 	传递json： 	public User insert(@RequestBody User user)
+	e	URL传递参数：	@GetMapping("/user/{id}")	@PathVariable("id")
+	f	获取格式化参数：@NumberFormat	
+		@DateTimeFormat也可以使用application.properties	spring.mvc.data-format=yyyy-MM-dd
+	
+4、自定义参数转化规则
+	
+		

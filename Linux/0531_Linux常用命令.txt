@@ -4,6 +4,8 @@
 开放22端口：	iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 				iptables -A OUTPUT -p tcp --sport 22 -j ACCEPT
 				***service iptables save***
+				vim /etc/sysconfig/iptables
+				
 查看已安装软件：	rpm -qa | grep "xxx"
 					yum list installed | grep "xxx" 
 查看软件位置：	rpm -ql "xxx"
