@@ -25,4 +25,9 @@ tar -zxvf apache-tomcat-9.0.0.M18.tar.gz
 
 进入redis:	redis-cli
 			keys *
+			
+运行可执行Jar：	java -jar XXX.jar  
+				java -jar XXX.jar & (&表示后台运行)
+				nohup java -jar XXX.jar & (nohup当账户退出或终端关闭时，程序依然继续运行)  
+				
 
