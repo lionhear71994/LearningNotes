@@ -57,5 +57,6 @@ private SysUser user;
 	collectin属性可在接口使用@Param指定名字。  
 	<bind narne= userNarneLike value="’%’＋ userNarne +'%'” />	----拼接字符串  
 	
+9、代码生成器 
   
   
