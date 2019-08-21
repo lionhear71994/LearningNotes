@@ -1,14 +1,14 @@
 1、XML对应接口  
 ```
-	<mappers>
-		<package name="com.android.xxx" />
-	</mappers>
+<mappers>
+	<package name="com.android.xxx" />
+</mappers>
 ```  
 2、数据库列映射到 Java 对象的驼峰式命名属性  
 ```
-	<settings>  
-		<settings name="mapUndersocreToCamelCase" value="true" />
-	</settings>
+<settings>  
+	<settings name="mapUndersocreToCamelCase" value="true" />
+</settings>
 ```  
 3、多表查询多个返回值类型  
 ```  
@@ -24,10 +24,10 @@ private SysUser user;
 5、获取主键的值  
 	a.useGeneratedKeys 设置为true后，MyBatis会使用JDBCgetGeneratedKeys方法来取出 由数据库内部生成的主键。获得主键值后将其赋值给 keyProperty 配置的 id 属性。  
 	b.代码如下：  
-	```  
-	<selectKey keyColumn=” id” resultType=” long” keyProperty=” id” order=” AFTER” >
-		SELECT LAST INSERT ID () 
-	</selectKey>
+```  
+<selectKey keyColumn=” id” resultType=” long” keyProperty=” id” order=” AFTER” >
+	SELECT LAST INSERT ID () 
+</selectKey>
 	```  
 6、多参数查询使用@Param  
   
@@ -57,7 +57,7 @@ choose用法
 ```  
 where用法：如果该标签包含的元素中有返回值，就插入where ；如果where后面字符以AND、OR开头的，就将它们剔除。  
 ```
- <trim prefix="SET" 	suffixOverrides=",">...</trim>
+<trim prefix="SET" 	suffixOverrides=",">...</trim>
 ```
 foreach:  
 ```
