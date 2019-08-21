@@ -74,21 +74,20 @@ foreach:
 	xml文件模板：
 ```
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE generatorConfiguration
-    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
-    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 	<generatorConfiguration>
-		<context id="mybatis1" 								--id必选属性
-		defaultModelType="conditional">						--defaultModelType:默认值conditional,flat,hierarchical
-				<property>								    --三个分隔符属性：是否启用，前置分隔符，后置分隔符。和一个javaFileEncoding=UTF-8
-				<jdbcConnection>							--driverClass,connectionURL必选属性
-				<table>										--tableName必选属性(可使用通配符%)
-					<property>								
-					<generatedKey>							--生成的主键属性
-				</table>
+		//id必选属性,	defaultModelType:默认值conditional,flat,hierarchical
+		<context id="mybatis1" defaultModelType="conditional">			
+			//三个分隔符属性：是否启用，前置分隔符，后置分隔符。和一个javaFileEncoding=UTF-8
+			<property>
+			//driverClass,connectionURL必选属性				
+			<jdbcConnection>									
+			//tableName必选属性(可使用通配符%)
+			<table>														
+				<property>		
+				//生成的主键属性
+				<generatedKey>									
+			</table>
 		</context>
 	</generatorConfiguration>
 ```
-
-	
-  
