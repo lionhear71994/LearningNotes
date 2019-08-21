@@ -28,7 +28,7 @@ private SysUser user;
 <selectKey keyColumn=” id” resultType=” long” keyProperty=” id” order=” AFTER” >
 	SELECT LAST INSERT ID () 
 </selectKey>
-	```  
+```
 6、多参数查询使用@Param  
   
 7、Mybatis 也可以通过注解写SQL语句，比如@Select,@Insert...  不推荐该种方式
