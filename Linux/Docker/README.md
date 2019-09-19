@@ -23,4 +23,14 @@ docker kill  [镜像名/id]
 启动已停止的容器
 docker start  [镜像名/id]    
 
+1.停止所有容器
+docker stop $(docker ps -q)
+2.删除所有停止容器
+docker rm $(docker ps -aq)
+3.删除所有运行容器
+docker stop $(docker ps -q) & docker rm $(docker ps -aq)
+
+
+进入mysql容器： docker exec -it mysql /bin/bash
+
 
