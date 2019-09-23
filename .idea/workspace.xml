@@ -2,13 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ba98da6-8ec5-46ba-941a-91369b461ed7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Java/Spring/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Java/Spring/Spring Security/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Linux/0423_Connect to MySQL on MyCentOS.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Docker/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/前端/2019.6/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/前端/CSS基础.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/前端/JS基础.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/前端/day1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/前端/html基础.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/前端/myScript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/前端/mystyle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/JVM/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Java/JVM/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/Spring/0423_Connect to MySQL on MyCentOS.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java/Spring/Spring Security/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Java/Spring/Spring Security/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Linux/Docker/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB/2019.6/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB/CSS基础.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB/JS基础.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB/day1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB/html基础.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB/myScript.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WEB/mystyle.css" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,8 +66,16 @@
       <option name="presentableId" value="Default" />
       <updated>1560332169818</updated>
       <workItem from="1560332171496" duration="1782000" />
-      <workItem from="1568947871525" duration="4620000" />
+      <workItem from="1568947871525" duration="6838000" />
     </task>
+    <task id="LOCAL-00001" summary="0922">
+      <created>1569235470826</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1569235470826</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -75,5 +94,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="0922" />
+    <option name="LAST_COMMIT_MESSAGE" value="0922" />
   </component>
 </project>
