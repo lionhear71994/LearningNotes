@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ba98da6-8ec5-46ba-941a-91369b461ed7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/MySQL/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/JVM/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Java/JVM/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +56,7 @@
       <workItem from="1568947871525" duration="6915000" />
       <workItem from="1569305614272" duration="48000" />
       <workItem from="1569305689143" duration="3294000" />
-      <workItem from="1569369717487" duration="2119000" />
+      <workItem from="1569369717487" duration="9258000" />
     </task>
     <task id="LOCAL-00001" summary="0922">
       <created>1569235470826</created>
@@ -72,7 +72,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569248552699</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="0925 JVM内容">
+      <created>1569372003166</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1569372003166</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -95,6 +102,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="0922" />
     <MESSAGE value="0923 Spring Security" />
-    <option name="LAST_COMMIT_MESSAGE" value="0923 Spring Security" />
+    <MESSAGE value="0925 JVM内容" />
+    <option name="LAST_COMMIT_MESSAGE" value="0925 JVM内容" />
   </component>
 </project>
