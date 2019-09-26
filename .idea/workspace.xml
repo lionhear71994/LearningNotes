@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6ba98da6-8ec5-46ba-941a-91369b461ed7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MySQL/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/MySQL/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Linux/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Linux/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,7 +23,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Java Project/learningspringcloud" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -57,7 +57,7 @@
       <workItem from="1569305614272" duration="48000" />
       <workItem from="1569305689143" duration="3294000" />
       <workItem from="1569369717487" duration="9297000" />
-      <workItem from="1569464062330" duration="4780000" />
+      <workItem from="1569464062330" duration="7436000" />
     </task>
     <task id="LOCAL-00001" summary="0922">
       <created>1569235470826</created>
@@ -87,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569423410286</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="0926 MySQL技巧">
+      <created>1569478349380</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1569478349380</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,6 +119,7 @@
     <MESSAGE value="0923 Spring Security" />
     <MESSAGE value="0925 JVM内容" />
     <MESSAGE value="0925 MySQL技巧" />
-    <option name="LAST_COMMIT_MESSAGE" value="0925 MySQL技巧" />
+    <MESSAGE value="0926 MySQL技巧" />
+    <option name="LAST_COMMIT_MESSAGE" value="0926 MySQL技巧" />
   </component>
 </project>
