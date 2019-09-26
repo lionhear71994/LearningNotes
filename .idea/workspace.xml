@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6ba98da6-8ec5-46ba-941a-91369b461ed7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Linux/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Linux/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +56,7 @@
       <workItem from="1569305614272" duration="48000" />
       <workItem from="1569305689143" duration="3294000" />
       <workItem from="1569369717487" duration="9297000" />
-      <workItem from="1569464062330" duration="7436000" />
+      <workItem from="1569464062330" duration="7944000" />
     </task>
     <task id="LOCAL-00001" summary="0922">
       <created>1569235470826</created>
@@ -94,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569478349380</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="0926 Linux 查看文件相关命令">
+      <created>1569481273554</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1569481273554</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -103,6 +109,31 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -112,6 +143,11 @@
         </entry>
       </map>
     </option>
+    <option name="OPEN_TABS">
+      <set>
+        <option value="1" />
+      </set>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -120,6 +156,7 @@
     <MESSAGE value="0925 JVM内容" />
     <MESSAGE value="0925 MySQL技巧" />
     <MESSAGE value="0926 MySQL技巧" />
-    <option name="LAST_COMMIT_MESSAGE" value="0926 MySQL技巧" />
+    <MESSAGE value="0926 Linux 查看文件相关命令" />
+    <option name="LAST_COMMIT_MESSAGE" value="0926 Linux 查看文件相关命令" />
   </component>
 </project>

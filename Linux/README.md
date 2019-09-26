@@ -49,7 +49,7 @@ tar -zxvf apache-tomcat-9.0.0.M18.tar.gz
 ### 查看日志文件
 * cat:从第一行开始查看文件，-n表显示行号，-A显示换行符等特殊字符。
 * tac:从最后一行开始查看文件，和cat相反。
-* nl:带行号查看文件，定制行号。
-* more/less:分页查看你，"/"可查找字符串,less更好用page up/down。
+* nl:带行号查看，定制行号。
+* more/less:分页查看，"/"可查找字符串,less更好用page up/down。
 * head/tail:查看前几行或后几行,-n接查看的行数。
 
