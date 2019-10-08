@@ -50,4 +50,10 @@ ALTER TABLE table_name AUTO_INCREMENT = value;
 CURDATE();
 DATE(NOW());
 ```
+### SQL获取id为奇数值
+WHERE mod(id,2) = 1;
+### 交换值
+```sql
+UPDATE salary SET sex = if(sex = 'f', 'm', 'f');
+```
 
