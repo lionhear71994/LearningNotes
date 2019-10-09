@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ba98da6-8ec5-46ba-941a-91369b461ed7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Java/Spring/AOP/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -62,7 +63,8 @@
       <workItem from="1569729361810" duration="3702000" />
       <workItem from="1570503189502" duration="120000" />
       <workItem from="1570510100760" duration="9240000" />
-      <workItem from="1570537416482" duration="3461000" />
+      <workItem from="1570537416482" duration="3595000" />
+      <workItem from="1570621231022" duration="1207000" />
     </task>
     <task id="LOCAL-00001" summary="0922">
       <created>1569235470826</created>
@@ -148,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570540290778</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="1008">
+      <created>1570543251246</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1570543251246</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,11 +214,11 @@
     <MESSAGE value="0925 MySQL技巧" />
     <MESSAGE value="0926 MySQL技巧" />
     <MESSAGE value="0926 Linux 查看文件相关命令" />
-    <MESSAGE value="1008" />
     <MESSAGE value="1008 Hystrix" />
     <MESSAGE value="1008 MySQL索引" />
     <MESSAGE value="1008 jQuery" />
     <MESSAGE value="1008 存储过程和函数" />
-    <option name="LAST_COMMIT_MESSAGE" value="1008 存储过程和函数" />
+    <MESSAGE value="1008" />
+    <option name="LAST_COMMIT_MESSAGE" value="1008" />
   </component>
 </project>
