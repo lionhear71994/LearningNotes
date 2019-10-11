@@ -35,9 +35,13 @@ public class Singleton {
 * synchronized和ReentrantLock：  
 都是可重入锁；  
 synchronized通过JVM底层实现，ReentrantLock通过lock()等方法API实现；  
-ReentrantLock增加了一些高级功能，主要来说主要有三点：①等待可中断；②可实现公平锁；③可实现选择性通知（锁可以绑定多个条件）。
+ReentrantLock增加了一些高级功能，主要来说主要有三点：  
+①等待可中断；     --lock.lockInterruptibly(),放弃等待改为做其他事情。  
+②可实现公平锁；    --ReentrantLock(boolean fair)构造方法来实现，默认非公平。公平锁即先等待的线程先获得锁。    
+③可实现选择性通知（锁可以绑定多个条件）。    --Condition接口实现,可更加灵活调度线程。
 ### volatile
-
+* 禁止指令重排
+* 多内存可见性
 ### Runable/Callable/线程池  
 
 ###ThreadLocal类
