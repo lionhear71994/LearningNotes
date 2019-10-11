@@ -53,3 +53,6 @@ tar -zxvf apache-tomcat-9.0.0.M18.tar.gz
 * more/less:分页查看，"/"可查找字符串,less更好用page up/down。
 * head/tail:查看前几行或后几行,-n接查看的行数。
 
+### 压缩与解压缩
+* tar -zcvf test.tar.gz /test/
+* tar -xvf test.tar.gz -C /usr

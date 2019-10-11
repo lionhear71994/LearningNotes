@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6ba98da6-8ec5-46ba-941a-91369b461ed7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java/并发/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Java/并发/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java/IO流/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Java/IO/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java/集合框架/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Java/集合框架/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +74,7 @@
       <workItem from="1570676835192" duration="2026000" />
       <workItem from="1570688899861" duration="6697000" />
       <workItem from="1570760765165" duration="999000" />
-      <workItem from="1570796190962" duration="254000" />
+      <workItem from="1570796190962" duration="2887000" />
     </task>
     <task id="LOCAL-00001" summary="0922">
       <created>1569235470826</created>
@@ -194,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570760871441</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="1011 ReentrantLock和volatile">
+      <created>1570796657615</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1570796657615</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,6 +268,7 @@
     <MESSAGE value="1010 Java 并发" />
     <MESSAGE value="1011" />
     <MESSAGE value="1011 dev" />
-    <option name="LAST_COMMIT_MESSAGE" value="1011 dev" />
+    <MESSAGE value="1011 ReentrantLock和volatile" />
+    <option name="LAST_COMMIT_MESSAGE" value="1011 ReentrantLock和volatile" />
   </component>
 </project>
