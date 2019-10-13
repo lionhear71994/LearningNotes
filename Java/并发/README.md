@@ -42,6 +42,7 @@ ReentrantLock增加了一些高级功能，主要来说主要有三点：
 ### volatile
 * 禁止指令重排
 * 多内存可见性
-### Runable/Callable/线程池  
-
-###ThreadLocal类
+### 线程池
+* 实现Runnable接口或Callable接口，用于ThreadPoolExecutor或ScheduledThreadPoolExecutor执行。
+* execute() 方法用于提交不需要返回值的任务;submit() 方法用于提交需要返回值的任务。线程池会返回一个Future类型的对象。
+* 建议通过ThreadPoolExecutor创建。
